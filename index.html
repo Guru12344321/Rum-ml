@@ -1,949 +1,404 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Guru Narasimha — UI/UX Designer</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guru Narasimha — UI/UX & Product Designer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#0d1117;--bg2:#161b22;--bg3:#1c2330;
-  --green:#4ade80;--green2:#22c55e;--cyan:#22d3ee;
-  --text:#e6edf3;--muted:#7d8590;--muted2:#a3b1bf;
-  --card:#161b22;--card2:#1c2330;--border:rgba(255,255,255,0.08);
-  --green-glow:rgba(74,222,128,0.15);
-  --radius:12px;
-}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;cursor:none}
-::-webkit-scrollbar{width:3px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:var(--green);border-radius:2px}
+:root{--bg:#efeeec;--ink:#0d0d0d;--mute:#6b6b68;--line:#d6d5d1;--card:#e6e5e1;--acc:#3a4bff;--on:#efeeec;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d0d0d;--ink:#f1f0ec;--mute:#8d8d89;--line:#2a2a28;--card:#171716;--acc:#7c8aff;--on:#0d0d0d}}
+:root[data-theme="dark"]{--bg:#0d0d0d;--ink:#f1f0ec;--mute:#8d8d89;--line:#2a2a28;--card:#171716;--acc:#7c8aff;--on:#0d0d0d}
+*,*::before,*::after{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 80px);height:100%}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.55 "Inter Tight",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(18px,4vw,40px)}
+section{padding:clamp(72px,11vw,150px) 0}
+.lab{font-size:15px;font-weight:500;color:var(--mute);margin-bottom:18px;display:block}
+h2{font-size:clamp(40px,7.5vw,104px);line-height:.92;letter-spacing:-.04em;font-weight:700;text-transform:uppercase}
+h3{font-weight:600;letter-spacing:-.02em}
+/* nav */
+nav{position:fixed;top:calc(env(safe-area-inset-top,0px) + 14px);left:0;right:0;z-index:50;display:flex;justify-content:center;padding:0 14px}
+.pill{display:flex;align-items:center;gap:6px;padding:7px 8px 7px 20px;border-radius:99px;background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);max-width:100%}
+.pill b{font-weight:700;letter-spacing:-.02em;margin-right:14px}
+.pill a.l{padding:8px 12px;font-size:15px;border-radius:99px;transition:background .25s}
+.pill a.l:hover{background:var(--card)}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 24px;border-radius:99px;background:var(--ink);color:var(--on);font-weight:600;font-size:15px;position:relative;overflow:hidden;isolation:isolate;border:0;cursor:pointer;font-family:inherit}
+.btn::before{content:"";position:absolute;inset:0;background:var(--acc);transform:translateY(101%);transition:transform .4s cubic-bezier(.2,.8,.2,1);z-index:-1}
+.btn:hover::before{transform:none}.btn:hover{color:#fff}
+.btn.o{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.btn.o:hover{color:#fff;border-color:var(--acc)}
+.pill .btn{padding:9px 18px}
+@media(max-width:760px){.pill a.l{display:none}.pill b{margin-right:26px}}
+/* hero */
+#hero{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:120px 0 40px}
+.meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-weight:500;font-size:15px;color:var(--mute)}
+.meta .st{display:inline-flex;align-items:center;gap:8px;color:var(--ink)}
+.dot{width:9px;height:9px;border-radius:50%;background:#22c55e;animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 #22c55e88}100%{box-shadow:0 0 0 12px #22c55e00}}
+.big{font-size:clamp(56px,15.2vw,236px);line-height:.84;letter-spacing:-.06em;font-weight:800;text-transform:uppercase;margin:clamp(28px,5vw,60px) 0 clamp(22px,3vw,40px)}
+.big .w{display:block;overflow:hidden;padding-bottom:.06em}
+.big .c{display:inline-block}
+.js .big .c{transform:translateY(105%)}
+.ready .big .c{animation:up .9s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--i)*40ms + 150ms)}
+@keyframes up{to{transform:none}}
+.hbot{display:grid;grid-template-columns:1.1fr 1fr;gap:30px;align-items:end;border-top:1px solid var(--line);padding-top:26px}
+.hbot h1{font-size:clamp(22px,3vw,38px);line-height:1.05;letter-spacing:-.03em;font-weight:600;text-transform:uppercase}
+.hbot p{color:var(--mute);max-width:46ch}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+@media(max-width:760px){.hbot{grid-template-columns:1fr}}
+/* marquee */
+.mq{overflow:hidden;border-block:1px solid var(--line);padding:22px 0}
+.mq div{display:flex;width:max-content;animation:mq 38s linear infinite}
+.mq:hover div{animation-play-state:paused}
+.mq span{font-size:clamp(26px,4.4vw,58px);font-weight:600;letter-spacing:-.035em;white-space:nowrap;padding-right:.6em}
+.mq span i{font-style:normal;color:var(--acc);margin-left:.6em}
+@keyframes mq{to{transform:translateX(-50%)}}
+/* about */
+.ab{display:grid;grid-template-columns:1fr 1.3fr;gap:clamp(30px,6vw,100px)}
+.ab p{font-size:clamp(19px,2.2vw,27px);line-height:1.3;letter-spacing:-.02em;margin-bottom:22px}
+.ab p b{font-weight:600}.ab p.s{font-size:17px;color:var(--mute);letter-spacing:0;line-height:1.55}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:clamp(40px,6vw,80px)}
+.stat{border-top:1px solid var(--ink);padding-top:16px}
+.stat strong{display:block;font-size:clamp(44px,8vw,110px);letter-spacing:-.05em;line-height:1;font-weight:700}
+.stat span{color:var(--mute);font-size:15px}
+@media(max-width:760px){.ab{grid-template-columns:1fr}}
+/* skills */
+.sk{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,100px);margin-top:clamp(36px,5vw,64px)}
+.bar{padding:18px 0;border-top:1px solid var(--line)}
+.bar div{display:flex;justify-content:space-between;font-weight:500;margin-bottom:12px}
+.bar i{display:block;height:3px;background:var(--line);position:relative;border-radius:3px}
+.bar i::after{content:"";position:absolute;inset:0;background:var(--ink);border-radius:3px;transform-origin:left;transform:scaleX(var(--s,1));transition:transform 1.3s cubic-bezier(.2,.8,.2,1)}
+.js .bar:not(.in) i::after{transform:scaleX(0)}
+.tags{display:flex;flex-wrap:wrap;gap:10px}
+.tg{padding:9px 18px;border:1px solid var(--line);border-radius:99px;font-size:15px;font-weight:500;transition:all .3s}
+.tg:hover{background:var(--ink);color:var(--on);border-color:var(--ink);transform:translateY(-3px)}
+.sk h3{font-size:22px;margin-bottom:18px}
+@media(max-width:760px){.sk{grid-template-columns:1fr}}
+/* work */
+.hd{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:clamp(36px,5vw,64px)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,56px) clamp(16px,2.4vw,32px)}
+.pj{display:block}
+.pj .im{aspect-ratio:4/3;border-radius:22px;position:relative;overflow:hidden;background:hsl(var(--h) 55% 46%);display:flex;align-items:flex-end;padding:22px;color:#fff;transition:border-radius .5s,transform .5s cubic-bezier(.2,.8,.2,1)}
+.pj .im::before{content:"";position:absolute;inset:-30%;background:radial-gradient(circle at var(--x,30%) var(--y,20%),hsl(calc(var(--h) + 40) 90% 70% / .85),transparent 55%);transition:transform .6s}
+.pj .im b{position:relative;font-size:clamp(36px,6vw,84px);line-height:.85;letter-spacing:-.05em;text-transform:uppercase;font-weight:800;opacity:.92}
+.pj .im em{position:absolute;top:18px;right:18px;font-style:normal;width:46px;height:46px;border-radius:50%;background:#fff;color:#0d0d0d;display:grid;place-items:center;font-size:20px;transform:scale(0) rotate(-45deg);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.pj:hover .im{border-radius:60px 22px 60px 22px}
+.pj:hover .im::before{transform:scale(1.25) translate(6%,6%)}
+.pj:hover .im em{transform:scale(1) rotate(0)}
+.pj h3{font-size:clamp(22px,2.4vw,30px);margin:18px 0 6px}
+.pj p{color:var(--mute);font-size:16px;max-width:52ch}
+.pj .tags{margin-top:14px;gap:8px}.pj .tg{padding:5px 13px;font-size:13px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+/* experience */
+.ex{border-top:1px solid var(--line)}
+.row{border-bottom:1px solid var(--line)}
+.row button{all:unset;box-sizing:border-box;width:100%;display:grid;grid-template-columns:1.2fr 1fr auto 40px;gap:16px;align-items:center;padding:26px 0;cursor:pointer;font-size:clamp(20px,2.6vw,34px);letter-spacing:-.03em;font-weight:600}
+.row button:focus-visible{outline:2px solid var(--acc)}
+.row button small{font-size:15px;color:var(--mute);font-weight:500;letter-spacing:0}
+.row .pl{width:36px;height:36px;border:1px solid var(--line);border-radius:50%;position:relative;transition:transform .4s,background .3s}
+.row .pl::before,.row .pl::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:1.5px;background:var(--ink);transform:translate(-50%,-50%);transition:.3s}
+.row .pl::after{transform:translate(-50%,-50%) rotate(90deg)}
+.row.o .pl{transform:rotate(135deg);background:var(--ink)}
+.row.o .pl::before,.row.o .pl::after{background:var(--on)}
+.row:hover button{color:var(--acc)}
+.pn{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s cubic-bezier(.2,.8,.2,1)}
+.row.o .pn{grid-template-rows:1fr}
+.pn>div{overflow:hidden}
+.pn ul{padding:0 0 26px 20px;max-width:70ch;color:var(--mute)}.pn li{margin-bottom:8px}
+.pn .tags{padding-bottom:28px}
+@media(max-width:760px){.row button{grid-template-columns:1fr 40px;gap:4px}.row button small:nth-of-type(2){display:none}}
+/* edu */
+.ed{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,100px)}
+.ed h3{font-size:22px;margin-bottom:8px}
+.it{padding:18px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;transition:padding-left .35s}
+.it:hover{padding-left:12px}
+.it b{font-weight:600;display:block;letter-spacing:-.01em}.it span{color:var(--mute);font-size:15px}.it em{font-style:normal;font-weight:600;white-space:nowrap}
+@media(max-width:760px){.ed{grid-template-columns:1fr}}
+/* contact */
+.ct{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,100px);margin-top:clamp(30px,5vw,60px)}
+.ct p{color:var(--mute);max-width:40ch;margin-bottom:26px}
+.soc{display:flex;gap:10px;flex-wrap:wrap}
+form{display:grid;gap:14px}
+label{font-size:15px;font-weight:500}
+input,textarea{width:100%;background:transparent;border:0;border-bottom:1px solid var(--ink);padding:10px 0 14px;font:inherit;color:inherit;border-radius:0;transition:border-color .3s}
+input:focus,textarea:focus{outline:0;border-color:var(--acc)}
+textarea{resize:vertical;min-height:90px}
+form .btn{justify-self:start;margin-top:8px}
+@media(max-width:760px){.ct{grid-template-columns:1fr}}
+/* footer */
+footer{background:var(--ink);color:var(--on);padding:70px 0 0;overflow:hidden}
+.fg{display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px}
+footer h2{font-size:clamp(28px,4vw,52px);line-height:1;max-width:14ch}
+footer h4{font-size:15px;font-weight:500;opacity:.6;margin-bottom:14px}
+footer a{display:block;padding:3px 0;opacity:.9;transition:opacity .2s,transform .2s}footer a:hover{opacity:1;transform:translateX(4px)}
+.wm{font-size:clamp(90px,27vw,420px);font-weight:800;letter-spacing:-.07em;line-height:.78;text-transform:uppercase;margin:50px 0 0 -.03em;opacity:.95;white-space:nowrap}
+.cp{display:flex;justify-content:space-between;font-size:14px;opacity:.6;padding:18px 0}
+@media(max-width:760px){.fg{grid-template-columns:1fr 1fr}.fg>div:first-child{grid-column:1/-1}}
 
-/* CURSOR */
-#cur{position:fixed;width:10px;height:10px;background:var(--green);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s;mix-blend-mode:screen}
-#cur-ring{position:fixed;width:36px;height:36px;border:1px solid rgba(74,222,128,0.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .12s ease-out,width .2s,height .2s}
-body:has(a:hover) #cur,body:has(button:hover) #cur{width:18px;height:18px}
-body:has(a:hover) #cur-ring,body:has(button:hover) #cur-ring{width:50px;height:50px}
+/* v2 */
+.btn{transition:transform .3s cubic-bezier(.2,.8,.2,1),color .3s}
+#pg{position:fixed;top:0;left:0;right:0;height:3px;background:var(--acc);transform:scaleX(0);transform-origin:left;z-index:90}
+#pre{display:none}.js #pre{position:fixed;inset:0;z-index:100;background:var(--ink);color:var(--on);display:flex;flex-direction:column;justify-content:space-between;padding:calc(env(safe-area-inset-top,0px) + 26px) clamp(18px,4vw,40px) 26px;transition:transform 1s cubic-bezier(.7,0,.2,1)}
+#pre.x{transform:translateY(-100%)}
+#pre span{font-weight:500;opacity:.7}
+#pre b{font-size:clamp(90px,24vw,340px);line-height:.8;letter-spacing:-.06em;font-weight:800;align-self:flex-end}
+#cur{position:fixed;left:0;top:0;width:0;height:0;pointer-events:none;z-index:95;display:none}
+.hc #cur{display:block}
+.hc a,.hc button,.hc .pj{cursor:none}
+#cur::before{content:"View";position:absolute;left:-8px;top:-8px;width:16px;height:16px;border-radius:50%;background:var(--acc);color:#fff;font:600 0/1 "Inter Tight",sans-serif;display:grid;place-items:center;transition:all .35s cubic-bezier(.2,.8,.2,1)}
+#cur.h::before{width:56px;height:56px;left:-28px;top:-28px;opacity:.3}
+#cur.v::before{width:92px;height:92px;left:-46px;top:-46px;font-size:15px}
+#hero{position:relative;overflow:hidden}
+#hero .wrap{position:relative;z-index:2;width:100%}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.5;pointer-events:none;animation:dr 14s ease-in-out infinite alternate}
+.o1{width:38vw;height:38vw;left:-8vw;top:6%;background:#8fa0ff}
+.o2{width:32vw;height:32vw;right:-6vw;top:26%;background:#ffb98f;animation-delay:-6s}
+.o3{width:24vw;height:24vw;left:38vw;top:-6%;background:#9be8c8;animation-delay:-3s}
+@keyframes dr{to{transform:translate(6vw,8vh) scale(1.15)}}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .orb{opacity:.22}}
+:root[data-theme="dark"] .orb{opacity:.22}
+.bd{position:absolute;right:clamp(18px,5vw,70px);top:clamp(96px,15vh,160px);width:clamp(90px,11vw,150px);aspect-ratio:1;z-index:2}
+.bd svg{width:100%;height:100%;fill:var(--ink);animation:spin 16s linear infinite}
+.bd span{position:absolute;inset:0;display:grid;place-items:center;font-size:clamp(20px,2.4vw,32px)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.mq.r{border-top:0}.mq.r div{animation-direction:reverse;animation-duration:46s}
+.mq.r span{color:transparent;-webkit-text-stroke:1.5px var(--ink)}
+.mq.r span i{-webkit-text-stroke:0;color:var(--acc)}
+.sr{padding:clamp(70px,10vw,140px) 0 clamp(20px,4vw,60px)}
+.rl{display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:clamp(10px,3vw,40px);align-items:center;margin-top:24px}
+.sc{aspect-ratio:3/4;border-radius:clamp(14px,2vw,26px);overflow:hidden;background:hsl(var(--h) 55% 46%);will-change:transform}
+.sc:nth-child(2){aspect-ratio:4/5}
+.sc img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+.sc:hover img{transform:scale(1.07)}
+.pj .im img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+.pj:hover .im img{transform:scale(1.08)}
+.pj .im b,.pj .im::before{transition:opacity .5s}
+.pj .im.ok b,.pj .im.ok::before{opacity:0}
+@media(min-width:761px){.pj:nth-child(even){margin-top:clamp(40px,7vw,110px)}}
+.js h2.rv{opacity:1;transform:none}
+.js .wd{display:inline-block;overflow:hidden;vertical-align:top;padding:.04em 0}
+.js .wd>span{display:inline-block;transform:translateY(110%);transition:transform .9s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--i)*80ms)}
+.js .in .wd>span{transform:none}
+@media(prefers-reduced-motion:reduce){.js .wd>span{transform:none}.orb,.bd svg{animation:none}}
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 5rem;background:rgba(13,17,23,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
-.nav-logo{font-size:.95rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text)}
-.nav-logo span{display:inline-block;background:#4ade80;color:#0d1117;padding:2px 7px;border-radius:4px;margin-right:6px;font-size:.75rem}
-.nav-links{display:flex;gap:2.5rem;list-style:none}
-.nav-links a{color:var(--muted);text-decoration:none;font-size:.82rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;transition:color .2s}
-.nav-links a:hover{color:var(--text)}
+/* v3 stacked project cards */
+.grid{display:block}
+.pj{position:sticky;top:calc(env(safe-area-inset-top,0px) + 92px + var(--k)*16px);display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(20px,4vw,60px);align-items:center;padding:clamp(16px,2.4vw,34px);margin-bottom:clamp(28px,6vh,70px);background:var(--card);border:1px solid var(--line);border-radius:34px;transform-origin:top center;will-change:transform}
+.pj .tx{padding:clamp(4px,2vw,28px)}
+.pj .tx h3{font-size:clamp(28px,4vw,56px);line-height:1;letter-spacing:-.04em;margin:22px 0 14px}
+.pj .tx p{font-size:clamp(16px,1.4vw,19px);margin-bottom:8px}
+.go{display:inline-flex;gap:10px;align-items:center;margin-top:26px;font-weight:600;border-bottom:1.5px solid var(--ink);padding-bottom:3px}
+.go i{font-style:normal;transition:transform .35s}.pj:hover .go i{transform:translate(4px,-4px)}
+.grid .pj:nth-child(even){margin-top:0}
+.grid .pj .im{aspect-ratio:4/3;background:linear-gradient(135deg,hsl(var(--h) 60% 48%),hsl(calc(var(--h) + 50) 70% 62%))}
+.grid .pj .im img{height:130%;top:-15%}
+.js .pj .im{clip-path:inset(0 0 100% 0);transition:clip-path 1.3s cubic-bezier(.7,0,.2,1),border-radius .5s,transform .5s cubic-bezier(.2,.8,.2,1)}
+.js .pj.in .im{clip-path:inset(0)}
+.ch{position:absolute;z-index:2;padding:9px 16px;border-radius:99px;background:rgba(255,255,255,.74);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:#111;font-size:14px;font-weight:600;box-shadow:0 10px 30px #0003;animation:fl 5s ease-in-out infinite alternate}
+.c1{left:5%;top:9%}.c2{right:5%;bottom:10%;animation-delay:-2.5s}
+@keyframes fl{to{transform:translateY(-10px)}}
+@media(max-width:760px){.pj{position:relative;top:auto;grid-template-columns:1fr;border-radius:26px}}
+@media(prefers-reduced-motion:reduce){.js .pj .im{clip-path:none}.ch{animation:none}}
 
-/* HERO */
-#hero{min-height:100vh;display:flex;align-items:center;padding:0 5rem;padding-top:80px;position:relative;overflow:hidden}
-.hero-noise{position:absolute;inset:0;background-image:radial-gradient(ellipse 60% 50% at 70% 50%,rgba(74,222,128,0.06) 0%,transparent 70%);pointer-events:none}
-.hero-left{flex:1;max-width:560px;z-index:2}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.2);color:var(--green);padding:.35rem 1rem;border-radius:100px;font-size:.75rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;margin-bottom:1.75rem}
-.hero-badge-dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:blink 1.5s ease-in-out infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-.hero-h1{font-size:clamp(2.8rem,5vw,4.2rem);font-weight:900;line-height:1.05;letter-spacing:-.03em;margin-bottom:.3rem}
-.hero-h1 .green{color:var(--green)}
-.hero-sub{font-size:.9rem;color:var(--muted);margin:.75rem 0 .4rem;font-weight:400}
-.hero-name{font-size:.9rem;color:var(--muted2);margin-bottom:.5rem}
-.hero-name span{color:var(--green);font-weight:600}
-.hero-desc{font-size:.9rem;color:var(--muted);line-height:1.65;max-width:420px;margin-bottom:2.25rem}
-.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
-.btn-green{background:var(--green);color:#0d1117;padding:.7rem 1.6rem;border-radius:8px;border:none;cursor:none;font-family:'Inter',sans-serif;font-weight:600;font-size:.85rem;letter-spacing:.03em;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
-.btn-green:hover{background:var(--green2);transform:translateY(-2px);box-shadow:0 12px 40px rgba(74,222,128,0.25)}
-.btn-outline{background:transparent;color:var(--text);padding:.7rem 1.6rem;border-radius:8px;border:1px solid var(--border);cursor:none;font-family:'Inter',sans-serif;font-weight:500;font-size:.85rem;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
-.btn-outline:hover{border-color:rgba(255,255,255,0.25);transform:translateY(-2px)}
-.hero-right{flex:1;display:flex;justify-content:center;align-items:flex-end;position:relative;z-index:2}
-
-/* 3D CHARACTER */
-.char-container{position:relative;width:380px;height:400px;display:flex;align-items:flex-end;justify-content:center}
-.char-platform{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:220px;height:12px;background:radial-gradient(ellipse,rgba(74,222,128,0.3) 0%,transparent 70%);border-radius:50%}
-.char-svg{width:320px;height:370px;transition:transform .12s ease-out;filter:drop-shadow(0 20px 60px rgba(74,222,128,0.15))}
-.char-float{animation:charFloat 4s ease-in-out infinite}
-@keyframes charFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-
-/* SCROLL DOT */
-.scroll-ind{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;opacity:0;animation:fadeIn 1s ease 1.8s forwards}
-@keyframes fadeIn{to{opacity:1}}
-.scroll-ind-line{width:1px;height:48px;background:linear-gradient(to bottom,transparent,var(--green))}
-.scroll-ind-text{font-size:.65rem;letter-spacing:.15em;color:var(--muted);text-transform:uppercase}
-
-/* SECTION COMMONS */
-section{padding:7rem 5rem;position:relative}
-.sec-label{display:inline-block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:.75rem}
-.sec-title{font-size:clamp(1.8rem,3vw,2.6rem);font-weight:800;letter-spacing:-.03em;line-height:1.15}
-.sec-sub{color:var(--muted);font-size:.9rem;margin-top:.5rem}
-
-/* REVEAL */
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s cubic-bezier(.16,1,.3,1),transform .65s cubic-bezier(.16,1,.3,1)}
-.reveal.up{opacity:1;transform:translateY(0)}
-.reveal.d1{transition-delay:.1s}.reveal.d2{transition-delay:.2s}.reveal.d3{transition-delay:.3s}.reveal.d4{transition-delay:.4s}
-
-/* FEATURED PROJECTS */
-#projects{background:var(--bg);text-align:center}
-.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem;text-align:left}
-.proj-card{background:var(--card2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all .35s cubic-bezier(.16,1,.3,1)}
-.proj-card:hover{transform:translateY(-6px);border-color:rgba(74,222,128,0.25);box-shadow:0 24px 60px rgba(74,222,128,0.08)}
-.proj-thumb{height:200px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center}
-.proj-thumb-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3.5rem;transition:transform .4s cubic-bezier(.16,1,.3,1)}
-.proj-card:hover .proj-thumb-inner{transform:scale(1.06)}
-.proj-body{padding:1.5rem}
-.proj-tag{display:inline-block;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:.6rem}
-.proj-title{font-size:1.05rem;font-weight:700;letter-spacing:-.01em;margin-bottom:.5rem}
-.proj-desc{font-size:.82rem;color:var(--muted);line-height:1.6;margin-bottom:1.25rem}
-.proj-link{display:inline-flex;align-items:center;gap:6px;color:var(--green);font-size:.82rem;font-weight:600;text-decoration:none;letter-spacing:.04em;text-transform:uppercase;transition:gap .2s}
-.proj-link:hover{gap:10px}
-
-/* CASE STUDY */
-#casestudy{background:var(--bg2)}
-.cs-header{text-align:center;margin-bottom:4rem}
-.cs-content{max-width:860px;margin:0 auto}
-.cs-2col{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-bottom:3rem}
-.cs-label{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem}
-.cs-label.green{color:var(--green)}
-.cs-label.white{color:var(--text)}
-.cs-body{font-size:.88rem;color:var(--muted2);line-height:1.7}
-.cs-steps{list-style:none;display:flex;flex-direction:column;gap:.6rem}
-.cs-steps li{display:flex;align-items:flex-start;gap:10px;font-size:.88rem;color:var(--muted2)}
-.cs-step-num{background:rgba(74,222,128,0.15);color:var(--green);border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0;margin-top:1px}
-.cs-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:2.5rem 0}
-.metric-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;text-align:center}
-.metric-num{font-size:2rem;font-weight:800;color:var(--green);letter-spacing:-.02em}
-.metric-unit{font-size:1.2rem;color:var(--green)}
-.metric-star{color:#f59e0b}
-.metric-desc{font-size:.78rem;color:var(--muted);margin-top:.4rem}
-.ui-screens{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.5rem}
-.ui-screen{border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);height:200px;display:flex;align-items:center;justify-content:center;font-size:3rem}
-
-/* SKILLS */
-#skills{background:var(--bg);text-align:center}
-.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem;text-align:left}
-.skill-card{background:var(--card2);border:1px solid var(--border);border-radius:var(--radius);padding:1.75rem;transition:all .3s}
-.skill-card:hover{border-color:rgba(74,222,128,0.25);transform:translateY(-4px)}
-.skill-icon{width:44px;height:44px;border-radius:10px;background:rgba(74,222,128,0.1);display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem}
-.skill-name{font-size:1rem;font-weight:700;margin-bottom:1rem}
-.skill-tags{display:flex;flex-wrap:wrap;gap:.5rem}
-.skill-tag{background:var(--bg3);border:1px solid var(--border);color:var(--muted2);padding:.3rem .7rem;border-radius:6px;font-size:.75rem;font-weight:500}
-
-/* ABOUT */
-#about{background:var(--bg2)}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
-.about-text .sec-title{margin-bottom:1.25rem}
-.about-p{font-size:.9rem;color:var(--muted2);line-height:1.75;margin-bottom:1rem}
-.exp-highlights{margin-top:1.75rem}
-.exp-title{font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text);margin-bottom:1rem}
-.exp-items{display:flex;flex-direction:column;gap:.65rem}
-.exp-item{display:flex;align-items:flex-start;gap:10px;font-size:.86rem;color:var(--muted2)}
-.exp-check{color:var(--green);font-size:.9rem;flex-shrink:0;margin-top:1px}
-.about-img-wrap{position:relative}
-.about-img-inner{border-radius:16px;overflow:hidden;border:1px solid var(--border);background:var(--bg3);aspect-ratio:4/3;display:flex;align-items:center;justify-content:center}
-.desk-svg{width:90%;height:90%}
-.about-img-badge{position:absolute;bottom:-16px;left:50%;transform:translateX(-50%);background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:.75rem 1.5rem;display:flex;align-items:center;gap:12px;white-space:nowrap}
-.badge-num{font-size:1.3rem;font-weight:800;color:var(--green)}
-.badge-text{font-size:.78rem;color:var(--muted);line-height:1.4}
-
-/* CONTACT */
-#contact{background:var(--bg);text-align:center;padding:8rem 5rem}
-.contact-title{font-size:clamp(2rem,4vw,3rem);font-weight:900;letter-spacing:-.03em;line-height:1.1;margin-bottom:1rem}
-.contact-sub{font-size:.9rem;color:var(--muted);margin-bottom:3rem}
-.contact-row{display:flex;justify-content:center;gap:2rem;margin-bottom:3rem;flex-wrap:wrap}
-.contact-item{display:flex;align-items:center;gap:10px;background:var(--card2);border:1px solid var(--border);padding:.85rem 1.5rem;border-radius:10px;text-decoration:none;color:var(--text);transition:all .2s;font-size:.88rem}
-.contact-item:hover{border-color:rgba(74,222,128,0.3);transform:translateY(-2px)}
-.contact-icon{width:32px;height:32px;border-radius:8px;background:rgba(74,222,128,0.1);display:flex;align-items:center;justify-content:center}
-.socials{display:flex;justify-content:center;gap:.75rem}
-.social-btn{width:44px;height:44px;border-radius:10px;background:var(--card2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;text-decoration:none;color:var(--muted);transition:all .2s}
-.social-btn:hover{border-color:rgba(74,222,128,0.3);color:var(--green);transform:translateY(-3px)}
-
-/* FOOTER */
-footer{background:var(--bg2);border-top:1px solid var(--border);padding:1.5rem 5rem;display:flex;justify-content:space-between;align-items:center}
-footer p{font-size:.78rem;color:var(--muted)}
-.foot-logo{font-size:.85rem;font-weight:700;letter-spacing:.06em;color:var(--green)}
-
-/* WALKING SECTION */
-#walking{background:var(--bg2);padding:0;min-height:280vh;position:relative}
-.walk-sticky{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center}
-.walk-bg-line{position:absolute;bottom:18%;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent 0%,rgba(74,222,128,0.2) 20%,rgba(74,222,128,0.2) 80%,transparent 100%)}
-.walk-dots-row{position:absolute;bottom:calc(18% - 3px);left:0;right:0;display:flex;gap:24px;padding:0 60px}
-.walk-dot{width:6px;height:6px;border-radius:50%;background:rgba(74,222,128,0.15);flex-shrink:0}
-.walk-section-title{position:absolute;top:3.5rem;left:5rem;right:5rem;text-align:center}
-.walk-section-title h2{font-size:2.4rem;font-weight:800;letter-spacing:-.03em}
-.walk-section-title p{color:var(--muted);font-size:.9rem;margin-top:.5rem}
-.walk-track{position:absolute;bottom:22%;left:0;display:flex;align-items:center;gap:80px;padding:0 80px;will-change:transform}
-.walk-card{min-width:300px;max-width:300px;background:var(--card2);border:1px solid var(--border);border-radius:16px;padding:2rem;opacity:0;transform:translateY(30px);transition:opacity .5s ease,transform .5s ease;pointer-events:none}
-.walk-card.show{opacity:1;transform:translateY(0);pointer-events:auto}
-.walk-card:hover{border-color:rgba(74,222,128,0.25)}
-.wc-num{font-size:2.5rem;font-weight:900;color:rgba(74,222,128,0.15);letter-spacing:-.04em;margin-bottom:.75rem}
-.wc-title{font-size:1.1rem;font-weight:700;margin-bottom:.5rem}
-.wc-desc{font-size:.83rem;color:var(--muted);line-height:1.65}
-.wc-icon{width:40px;height:40px;border-radius:10px;margin-bottom:1.25rem;display:flex;align-items:center;justify-content:center}
-
-/* WALKER */
-.walker{position:absolute;bottom:18%;will-change:left;z-index:10;transition:left 60ms linear;filter:drop-shadow(0 8px 24px rgba(74,222,128,0.2))}
-.walker-svg{width:70px;height:90px}
-@keyframes wLegL{0%,100%{transform:rotate(-18deg) translateY(0)}50%{transform:rotate(18deg) translateY(0)}}
-@keyframes wLegR{0%,100%{transform:rotate(18deg) translateY(0)}50%{transform:rotate(-18deg) translateY(0)}}
-@keyframes wArmL{0%,100%{transform:rotate(15deg)}50%{transform:rotate(-15deg)}}
-@keyframes wArmR{0%,100%{transform:rotate(-15deg)}50%{transform:rotate(15deg)}}
-@keyframes wBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
-.walking .ll{animation:wLegL .45s ease-in-out infinite;transform-origin:50% 0%}
-.walking .lr{animation:wLegR .45s ease-in-out infinite;transform-origin:50% 0%}
-.walking .al{animation:wArmL .45s ease-in-out infinite;transform-origin:50% 0%}
-.walking .ar{animation:wArmR .45s ease-in-out infinite;transform-origin:50% 0%}
-.walking .bd{animation:wBob .45s ease-in-out infinite}
-
-/* HERO ANIMATIONS */
-.hero-left>*{opacity:0;transform:translateY(20px);animation:heroUp .7s cubic-bezier(.16,1,.3,1) forwards}
-.hero-badge{animation-delay:.2s}.hero-h1{animation-delay:.35s}.hero-sub{animation-delay:.45s}
-.hero-name{animation-delay:.5s}.hero-desc{animation-delay:.55s}.hero-btns{animation-delay:.65s}
-@keyframes heroUp{to{opacity:1;transform:translateY(0)}}
-.hero-right{opacity:0;animation:heroUp .8s cubic-bezier(.16,1,.3,1) .7s forwards}
-
-@media(max-width:1024px){
-  nav,section,#contact,footer{padding-left:2rem;padding-right:2rem}
-  #hero{flex-direction:column;gap:2rem;padding:7rem 2rem 3rem;text-align:center}
-  .hero-btns{justify-content:center}
-  .hero-right{display:none}
-  .proj-grid,.skills-grid{grid-template-columns:1fr}
-  .about-grid,.cs-2col{grid-template-columns:1fr}
-  .cs-metrics{grid-template-columns:1fr}
-  .walk-section-title{left:2rem;right:2rem}
-}
+/* v4 alignment, icons, mockups */
+.ic{width:1.15em;height:1.15em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.ic.f{fill:currentColor;stroke:none}
+.ab,.sk,.ed,.ct,.fg,.hbot{align-items:start}
+.it{align-items:flex-start}
+.meta{display:flex;justify-content:space-between;align-items:center}
+.row button{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) 190px 40px}
+.row button small:nth-of-type(2){text-align:right}
+@media(max-width:760px){.row button{grid-template-columns:minmax(0,1fr) 40px;row-gap:2px}.row button span,.row button small{grid-column:1}.row button small:nth-of-type(2){display:block;text-align:left}.row button .pl{grid-column:2;grid-row:1/span 3}}
+#fs{color:var(--mute);font-size:15px;min-height:1.4em}
+.fl{display:flex;align-items:center;gap:10px}
+.ib{display:flex;gap:10px;margin-top:28px}
+.ib a{width:48px;height:48px;border:1px solid #ffffff40;border-radius:50%;display:grid;place-items:center;padding:0;transition:background .3s,color .3s,transform .3s}
+.ib a:hover{background:var(--on);color:var(--ink);transform:translateY(-4px)}
+.ib .ic{width:20px;height:20px}
+.cp{align-items:center}
+.im,.sc{container-type:inline-size}
+.grid .pj .im{padding:0}
+.mk{position:absolute;inset:0;display:grid;place-items:center}
+.dv{position:relative;z-index:1;background:#fff;color:#16171a;border-radius:3cqw;box-shadow:0 3cqw 8cqw #0006;overflow:hidden;font-size:clamp(8px,2.3cqw,15px);line-height:1.25;font-weight:500;display:flex;flex-direction:column;gap:1.4cqw;padding:2.2cqw}
+.dv.dk{background:#0e1117;color:#e9edf5}
+.dv.wide{width:76cqw;height:52cqw}
+.dv.ph{width:32cqw;height:64cqw;border-radius:5cqw;border:.8cqw solid #16171a;padding:3cqw 2.4cqw}
+.dv .ic{width:1.3em;height:1.3em}
+.cd{background:color-mix(in srgb,currentColor 8%,transparent);border-radius:2cqw;padding:1.6cqw;display:flex;flex-direction:column;gap:.8cqw;flex:1}
+.rw{display:flex;flex-direction:row;align-items:center;gap:1.4cqw}.rw.sp{justify-content:space-between}
+.pl{display:block;height:1.5cqw;border-radius:9cqw;background:currentColor;opacity:.16;flex:1}
+.dc{width:4cqw;height:4cqw;border-radius:50%;background:hsl(var(--h) 70% 52%);flex:none}
+.sq{display:block;flex:1;border-radius:1.8cqw;background:linear-gradient(160deg,hsl(calc(var(--h) + var(--o,0)) 65% 62%),hsl(calc(var(--h) + var(--o,0) + 20) 60% 42%))}
+.lv{padding:.6cqw 1.8cqw;border-radius:9cqw;background:hsl(var(--h) 70% 52%);color:#fff;font-weight:600;white-space:nowrap}
+.op{padding:.6cqw 1.8cqw;border-radius:9cqw;background:color-mix(in srgb,currentColor 8%,transparent)}
+.bt{background:hsl(var(--h) 70% 46%);color:#fff;border-radius:9cqw;text-align:center;padding:1.6cqw;font-weight:700}
+.cd.ac{background:hsl(var(--h) 70% 50%);color:#fff}
+.sc{background:linear-gradient(135deg,hsl(var(--h) 60% 48%),hsl(calc(var(--h) + 50) 70% 62%))}
+.sc .dv{transform:scale(1.65)}
+/* project image gallery */
+.vs{min-width:0;display:flex;flex-direction:column;gap:clamp(10px,1.6vw,18px)}
+.gl{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(8px,1.4vw,16px)}
+.gl img{width:100%;aspect-ratio:8/5;object-fit:cover;display:block;border-radius:clamp(10px,1.4vw,16px);border:1px solid var(--line);background:var(--bg);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.gl img:hover{transform:translateY(-4px) scale(1.03)}
+/* reveal */
+.js .rv{opacity:0;transform:translateY(34px);transition:opacity .9s,transform .9s cubic-bezier(.2,.8,.2,1);transition-delay:var(--d,0s)}
+.js .rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.js .rv{opacity:1;transform:none}.js .big .c{transform:none}}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3.5 7.5 8.5 6 8.5-6"/></symbol><symbol id="i-dl" viewBox="0 0 24 24"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 20h14"/></symbol><symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5m0 0-6 6m6-6 6 6"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="m9 12 2 2 4-4"/></symbol><symbol id="i-be" viewBox="0 0 24 24"><path d="M22 7h-7V5h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14H15.97c.13 3.211 3.483 3.312 4.588 2.029h3.168zm-7.686-4h4.965c-.105-1.547-1.136-2.219-2.477-2.219-1.466 0-2.277.768-2.488 2.219zm-9.574 6.988H0V5.021h6.953c5.476.081 5.58 5.444 2.72 6.906 3.461 1.26 3.577 8.061-3.207 8.061zM3 11h3.584c2.508 0 2.906-3-.312-3H3v3zm3.391 3H3v3.016h3.341c3.055 0 2.868-3.016.05-3.016z"/></symbol></svg>
+<div id="pg"></div><div id="cur"></div><div id="pre"><span>Guru Narasimha — UI/UX Designer</span><b id="pc">0</b></div>
+<nav><div class="pill"><b>Guru</b>
+<a class="l" href="#about">About</a><a class="l" href="#skills">Skills</a><a class="l" href="#work">Work</a><a class="l" href="#experience">Experience</a>
+<a class="btn" href="#contact">Get in touch</a></div></nav>
 
-<div id="cur"></div>
-<div id="cur-ring"></div>
+<header id="hero"><i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i>
+<div class="bd" aria-hidden="true"><svg viewBox="0 0 200 200"><defs><path id="cp" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs><text font-size="15" font-weight="600"><textPath href="#cp" textLength="486" lengthAdjust="spacing">UI/UX DESIGN • AR/VR • PRODUCT • BRANDING • </textPath></text></svg><span>↓</span></div>
+<div class="wrap">
+<div class="meta"><span class="st"><i class="dot"></i>Available for new projects</span><span>©2026</span></div>
+<div class="big" aria-label="Guru Narasimha"><span class="w" data-t="Guru"></span><span class="w" data-t="Narasimha"></span></div>
+<div class="hbot">
+<h1>UI/UX &amp; Product Designer</h1>
+<div><p>I design user-centred digital products across AR/VR, games, crypto, e-commerce and e-learning, where every pixel has a purpose.</p>
+<div class="cta"><a class="btn" href="#work">See my work</a><a class="btn o" href="#contact">Get in touch</a></div></div>
+</div></div></header>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo"><span>GURU</span></div>
-  <ul class="nav-links">
-    <li><a href="#hero">Home</a></li>
-    <li><a href="#projects">Work</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
+<div class="mq" aria-hidden="true"><div id="mq"></div></div>
 
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-noise"></div>
-  <div class="hero-left">
-    <div class="hero-badge"><span class="hero-badge-dot"></span>Available for work</div>
-    <h1 class="hero-h1">
-      Designing<br>Meaningful<br>
-      <span class="green">Digital<br>Experiences</span>
-    </h1>
-    <p class="hero-sub">Hi, I'm <span style="color:var(--text);font-weight:600">GURU NARASIMHA</span></p>
-    <p class="hero-desc">UI/UX Designer crafting user-centered, scalable, and impactful products.</p>
-    <div class="hero-btns">
-      <button class="btn-green" onclick="window.open('https://www.behance.net/gurunarshima','_blank')">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#0d1117" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        VIEW PROJECTS
-      </button>
-      <button class="btn-outline" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 3h10v8H2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M2 3l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        DOWNLOAD RESUME
-      </button>
-    </div>
-  </div>
+<section id="about"><div class="wrap">
+<div class="ab"><div><span class="lab">/About me</span><h2>Hey!</h2></div>
+<div class="rv"><p>I'm <b>Guru</b>, a UI/UX and Product Designer with <b>3+ years of experience</b> across AR/VR experiences, game interfaces, agritech platforms, and cybersecurity dashboards.</p>
+<p class="s">My process is rooted in empathy and data. I work closely with developers and stakeholders so every pixel serves a purpose and every interaction feels natural.</p>
+<div class="cta"><a class="btn" href="https://www.behance.net/gurunarshima" target="_blank" rel="noopener"><svg class="ic f"><use href="#i-be"/></svg>See my Behance work</a><a class="btn o" href="https://drive.google.com/drive/folders/1bjinnE8N2tnVYhzngi_IP73ryw7fA0Sc?usp=drive_link" target="_blank" rel="noopener"><svg class="ic"><use href="#i-dl"/></svg>Download my CV</a></div></div></div>
+<div class="stats">
+<div class="stat rv"><strong data-n="3" data-s="+">0</strong><span>Years of experience</span></div>
+<div class="stat rv" style="--d:.1s"><strong data-n="10" data-s="+">0</strong><span>Projects completed</span></div>
+<div class="stat rv" style="--d:.2s"><strong data-n="5">0</strong><span>Companies worked with</span></div></div>
+</div></section>
 
-  <div class="hero-right">
-    <div class="char-container">
-      <div class="char-platform"></div>
-      <!-- 3D-style character sitting at desk with laptop -->
-      <svg id="heroChar" class="char-svg char-float" viewBox="0 0 320 370" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="skin" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FFD4A8"/><stop offset="100%" stop-color="#F5A97F"/></linearGradient>
-          <linearGradient id="shirt" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#B8F5E0"/><stop offset="100%" stop-color="#6EE7B7"/></linearGradient>
-          <linearGradient id="pants" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4B6B8A"/><stop offset="100%" stop-color="#2D4459"/></linearGradient>
-          <linearGradient id="desk" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3D5A6E"/><stop offset="100%" stop-color="#2A3F50"/></linearGradient>
-          <linearGradient id="chair" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5DEA9E"/><stop offset="100%" stop-color="#22C55E"/></linearGradient>
-          <linearGradient id="laptop" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#253545"/><stop offset="100%" stop-color="#1A2535"/></linearGradient>
-          <linearGradient id="screen" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1E3A5F"/><stop offset="100%" stop-color="#0F172A"/></linearGradient>
-          <linearGradient id="hair" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#2C2018"/><stop offset="100%" stop-color="#1A1209"/></linearGradient>
-          <filter id="sf"><feGaussianBlur stdDeviation="6"/></filter>
-          <filter id="sf2"><feGaussianBlur stdDeviation="3"/></filter>
-        </defs>
+<section id="skills" style="padding-top:0"><div class="wrap">
+<span class="lab">/Expertise</span><h2 class="rv">Skills &amp; tools</h2>
+<div class="sk">
+<div id="bars"></div>
+<div class="rv"><h3>Tools</h3><div class="tags" style="margin-bottom:40px"><span class="tg">Figma</span><span class="tg">Adobe XD</span><span class="tg">Framer</span><span class="tg">Balsamiq</span><span class="tg">SketchUp</span><span class="tg">Canva</span><span class="tg">Omni Graffle</span><span class="tg">3D Modeling</span></div>
+<h3>Focus areas</h3><div class="tags"><span class="tg">User Research</span><span class="tg">Info Architecture</span><span class="tg">Mobile Design</span><span class="tg">Design Systems</span><span class="tg">AR/VR</span><span class="tg">Game UI</span></div></div>
+</div></div></section>
 
-        <!-- SHADOW -->
-        <ellipse cx="175" cy="358" rx="100" ry="10" fill="rgba(74,222,128,0.15)" filter="url(#sf)"/>
+<div class="mq r" aria-hidden="true"><div id="mq2"></div></div>
+<section id="work"><div class="wrap">
+<div class="hd"><div><span class="lab">/Portfolio</span><h2 class="rv">Selected projects</h2></div><a class="btn o" href="https://www.behance.net/gurunarshima" target="_blank" rel="noopener">See all on Behance</a></div>
+<div class="grid" id="grid"></div>
+</div></section>
 
-        <!-- DESK -->
-        <rect x="60" y="220" width="210" height="14" rx="3" fill="url(#desk)"/>
-        <rect x="75" y="234" width="10" height="90" rx="3" fill="#243344"/>
-        <rect x="245" y="234" width="10" height="90" rx="3" fill="#243344"/>
-        <rect x="68" y="300" width="194" height="8" rx="3" fill="#1e2c3c" opacity=".6"/>
+<section id="experience" style="padding-top:0"><div class="wrap">
+<span class="lab">/Career</span><h2 class="rv" style="margin-bottom:clamp(36px,5vw,64px)">Work experience</h2>
+<div class="ex" id="ex"></div>
+</div></section>
 
-        <!-- PLANT on desk corner -->
-        <ellipse cx="92" cy="221" rx="12" ry="6" fill="#1A3A2A"/>
-        <path d="M92 221 Q85 200 78 185" stroke="#22C55E" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-        <ellipse cx="78" cy="184" rx="10" ry="6" fill="#16A34A" transform="rotate(-20 78 184)"/>
-        <path d="M92 215 Q99 198 104 188" stroke="#22C55E" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <ellipse cx="105" cy="187" rx="9" ry="5" fill="#22C55E" transform="rotate(15 105 187)"/>
+<section id="edu" style="padding-top:0"><div class="wrap">
+<span class="lab">/Background</span><h2 class="rv" style="margin-bottom:clamp(36px,5vw,64px)">Education</h2>
+<div class="ed">
+<div class="rv"><h3>Education</h3>
+<div class="it"><div><b>B.Sc (Hons) Agriculture Technology</b><span>ITM University, Gwalior · 2020–2024</span></div><em>8.2 CGPA</em></div>
+<div class="it"><div><b>Board of Intermediate Education</b><span>Andhra Pradesh State Board · 2020</span></div><em>90%</em></div>
+<div class="it"><div><b>S.S.C Secondary Education</b><span>Andhra Pradesh State Board · 2018</span></div><em>95%</em></div></div>
+<div class="rv" style="--d:.1s"><h3>Certifications</h3>
+<div class="it"><div><b>Foundation of UX Design</b><span>Coursera — Amanda Brophy</span></div></div>
+<div class="it"><div><b>UI/UX Design with Figma: 5+ Real World Projects</b><span>Udemy — Chetan Pujari</span></div></div>
+<div class="it"><div><b>Mobile App Design in Figma: Concept to Prototype</b><span>Udemy — Anton Voroniuk</span></div></div>
+<div class="it"><div><b>UI/UX Design with Figma &amp; Adobe XD</b><span>Udemy — Marcus Menti</span></div></div></div>
+</div></div></section>
 
-        <!-- CHAIR -->
-        <rect x="110" y="280" width="110" height="12" rx="4" fill="url(#chair)" opacity=".9"/>
-        <rect x="148" y="292" width="14" height="50" rx="4" fill="#1e7a4a"/>
-        <rect x="168" y="292" width="14" height="50" rx="4" fill="#1e7a4a"/>
-        <rect x="138" y="338" width="54" height="8" rx="3" fill="#1a6a40"/>
-        <!-- chair back -->
-        <rect x="108" y="230" width="114" height="55" rx="10" fill="url(#chair)" opacity=".85"/>
-        <rect x="116" y="238" width="98" height="42" rx="7" fill="rgba(0,0,0,0.15)"/>
+<section id="contact" style="padding-top:0"><div class="wrap">
+<span class="lab">/Get in touch</span><h2 class="rv">Have a project in mind?</h2>
+<div class="ct">
+<div class="rv"><p>I'm open to freelance projects, full-time roles, and collaborations. Tell me what you're building, whether it's a redesign, a new app, or a design system, and I'll reply as soon as I can.</p>
+<div class="soc"><a class="btn o" href="mailto:gurunarasimha26@gmail.com"><svg class="ic"><use href="#i-mail"/></svg>gurunarasimha26@gmail.com</a><a class="btn o" href="https://www.behance.net/gurunarshima" target="_blank" rel="noopener"><svg class="ic f"><use href="#i-be"/></svg>Behance</a></div></div>
+<form id="f" class="rv" style="--d:.1s"><div><label for="n">Your name</label><input id="n" autocomplete="name" placeholder="Jane Doe" required></div><div><label for="e">Email address</label><input id="e" type="email" autocomplete="email" placeholder="jane@company.com" required></div><div><label for="m">About your project</label><textarea id="m" placeholder="What are you building, and what do you need help with?" required></textarea></div><button class="btn" type="submit"><svg class="ic"><use href="#i-mail"/></svg>Send message</button><p id="fs" role="status"></p></form>
+</div></div></section>
 
-        <!-- LAPTOP -->
-        <rect x="105" y="175" width="130" height="48" rx="5" fill="url(#laptop)"/>
-        <rect x="112" y="180" width="116" height="38" rx="3" fill="url(#screen)"/>
-        <!-- screen content -->
-        <rect x="118" y="185" width="40" height="3" rx="1.5" fill="#6EE7B7" opacity=".8"/>
-        <rect x="118" y="192" width="60" height="2.5" rx="1" fill="#38BDF8" opacity=".6"/>
-        <rect x="118" y="198" width="35" height="2.5" rx="1" fill="#A78BFA" opacity=".5"/>
-        <rect x="118" y="204" width="55" height="2.5" rx="1" fill="#6EE7B7" opacity=".4"/>
-        <rect x="118" y="210" width="28" height="2.5" rx="1" fill="#38BDF8" opacity=".4"/>
-        <!-- status bar -->
-        <circle cx="156" cy="183" r="1.5" fill="#4ade80" opacity=".8"/>
-        <circle cx="161" cy="183" r="1.5" fill="#f59e0b" opacity=".8"/>
-        <circle cx="166" cy="183" r="1.5" fill="#ef4444" opacity=".8"/>
-        <!-- laptop base -->
-        <rect x="97" y="220" width="146" height="8" rx="2" fill="#1c2d3e"/>
-        <rect x="140" y="224" width="60" height="3" rx="1.5" fill="#152030"/>
-
-        <!-- MOUSE -->
-        <rect x="248" y="212" width="22" height="30" rx="11" fill="#1c2d3e" stroke="#2a3f50" stroke-width="1"/>
-        <rect x="258" y="212" width="1" height="14" rx=".5" fill="#2a3f50"/>
-
-        <!-- BODY -->
-        <rect x="118" y="148" width="94" height="85" rx="18" fill="url(#shirt)"/>
-        <!-- shirt collar V -->
-        <path d="M148 150 L165 175 L182 150" stroke="rgba(0,0,0,0.2)" stroke-width="2" fill="none" stroke-linejoin="round"/>
-        <!-- shirt pocket -->
-        <rect x="125" y="165" width="22" height="18" rx="4" fill="rgba(255,255,255,0.12)"/>
-        <rect x="125" y="165" width="22" height="5" rx="2" fill="rgba(255,255,255,0.1)"/>
-
-        <!-- LEFT ARM (resting on desk) -->
-        <rect x="88" y="163" width="36" height="24" rx="10" fill="url(#shirt)" transform="rotate(-8 88 163)"/>
-        <ellipse cx="90" cy="196" rx="14" ry="12" fill="url(#skin)"/>
-        <!-- fingers left -->
-        <rect x="78" y="193" width="8" height="12" rx="4" fill="url(#skin)"/>
-        <rect x="88" y="190" width="8" height="14" rx="4" fill="url(#skin)"/>
-        <rect x="98" y="192" width="8" height="13" rx="4" fill="url(#skin)"/>
-
-        <!-- RIGHT ARM (resting on desk) -->
-        <rect x="206" y="163" width="36" height="24" rx="10" fill="url(#shirt)" transform="rotate(8 242 163)"/>
-        <ellipse cx="240" cy="196" rx="14" ry="12" fill="url(#skin)"/>
-        <rect x="244" y="193" width="8" height="12" rx="4" fill="url(#skin)"/>
-        <rect x="234" y="190" width="8" height="14" rx="4" fill="url(#skin)"/>
-        <rect x="224" y="192" width="8" height="13" rx="4" fill="url(#skin)"/>
-
-        <!-- LEGS (sitting) -->
-        <rect x="122" y="228" width="38" height="20" rx="8" fill="url(#pants)"/>
-        <rect x="116" y="260" width="20" height="38" rx="8" fill="url(#pants)"/>
-        <!-- left shoe -->
-        <ellipse cx="126" cy="300" rx="18" ry="7" fill="#1a2535"/>
-        <ellipse cx="123" cy="298" rx="14" ry="5" fill="#253545"/>
-        <!-- right leg -->
-        <rect x="170" y="228" width="38" height="20" rx="8" fill="url(#pants)"/>
-        <rect x="194" y="260" width="20" height="38" rx="8" fill="url(#pants)"/>
-        <ellipse cx="204" cy="300" rx="18" ry="7" fill="#1a2535"/>
-        <ellipse cx="201" cy="298" rx="14" ry="5" fill="#253545"/>
-
-        <!-- NECK -->
-        <rect x="152" y="128" width="26" height="26" rx="10" fill="url(#skin)"/>
-
-        <!-- HEAD -->
-        <ellipse cx="165" cy="108" rx="42" ry="44" fill="url(#skin)"/>
-        <!-- head shading -->
-        <ellipse cx="180" cy="115" rx="20" ry="22" fill="rgba(200,140,90,0.1)"/>
-
-        <!-- HAIR -->
-        <ellipse cx="165" cy="72" rx="42" ry="24" fill="url(#hair)"/>
-        <rect x="123" y="72" width="20" height="28" rx="10" fill="url(#hair)"/>
-        <rect x="167" y="68" width="18" height="16" rx="8" fill="url(#hair)"/>
-        <!-- hair tuft front -->
-        <path d="M140 72 Q148 58 158 65 Q165 55 172 63 Q182 56 186 70" fill="url(#hair)"/>
-        <!-- ear left -->
-        <ellipse cx="123" cy="112" rx="8" ry="11" fill="url(#skin)"/>
-        <ellipse cx="125" cy="112" rx="5" ry="7" fill="#e8a070" opacity=".4"/>
-        <!-- ear right -->
-        <ellipse cx="207" cy="112" rx="8" ry="11" fill="url(#skin)"/>
-
-        <!-- EYES -->
-        <ellipse cx="150" cy="108" rx="7" ry="8" fill="white"/>
-        <ellipse cx="180" cy="108" rx="7" ry="8" fill="white"/>
-        <ellipse cx="151" cy="109" rx="5" ry="5.5" fill="#2C1810"/>
-        <ellipse cx="181" cy="109" rx="5" ry="5.5" fill="#2C1810"/>
-        <circle cx="149" cy="107" r="1.8" fill="white"/>
-        <circle cx="179" cy="107" r="1.8" fill="white"/>
-
-        <!-- GLASSES FRAMES -->
-        <rect x="138" y="101" width="24" height="16" rx="7" fill="none" stroke="#64748B" stroke-width="2.2"/>
-        <rect x="168" y="101" width="24" height="16" rx="7" fill="none" stroke="#64748B" stroke-width="2.2"/>
-        <line x1="162" y1="109" x2="168" y2="109" stroke="#64748B" stroke-width="2"/>
-        <line x1="138" y1="109" x2="130" y2="107" stroke="#64748B" stroke-width="2" stroke-linecap="round"/>
-        <line x1="192" y1="109" x2="200" y2="107" stroke="#64748B" stroke-width="2" stroke-linecap="round"/>
-
-        <!-- NOSE + MOUTH -->
-        <path d="M162 116 Q165 121 168 116" stroke="#d4956a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-        <path d="M152 126 Q160 134 178 126" stroke="#d4956a" stroke-width="2" fill="none" stroke-linecap="round"/>
-
-        <!-- EYEBROWS -->
-        <path d="M140 98 Q150 94 160 98" stroke="#2C1810" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-        <path d="M170 98 Q180 94 190 98" stroke="#2C1810" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-
-        <!-- SCREEN GLOW ON FACE -->
-        <ellipse cx="165" cy="120" rx="30" ry="20" fill="rgba(56,189,248,0.05)"/>
-      </svg>
-    </div>
-  </div>
-
-  <div class="scroll-ind">
-    <span class="scroll-ind-text">Scroll</span>
-    <div class="scroll-ind-line"></div>
-  </div>
-</section>
-
-<!-- FEATURED PROJECTS -->
-<section id="projects">
-  <div class="sec-label reveal">Featured Projects</div>
-  <h2 class="sec-title reveal d1">Featured Projects</h2>
-  <p class="sec-sub reveal d2">Explore my recent work and case studies</p>
-
-  <div class="proj-grid">
-    <div class="proj-card reveal d1">
-      <div class="proj-thumb" style="background:linear-gradient(135deg,#1a3a2a 0%,#0f1f15 100%)">
-        <div class="proj-thumb-inner" style="font-size:0">
-          <svg viewBox="0 0 240 160" width="240" height="160">
-            <rect width="240" height="160" fill="#0f1f15"/>
-            <rect x="20" y="20" width="90" height="120" rx="14" fill="#1a3520" stroke="#22c55e" stroke-width="1"/>
-            <rect x="30" y="30" width="70" height="45" rx="6" fill="#0d1a0e"/>
-            <rect x="34" y="34" width="62" height="37" rx="4" fill="#1a3a1a"/>
-            <circle cx="65" cy="53" r="12" fill="#ff6b6b" opacity=".9"/>
-            <rect x="34" y="82" width="30" height="3" rx="1.5" fill="#22c55e" opacity=".7"/>
-            <rect x="34" y="88" width="45" height="2" rx="1" fill="#4ade80" opacity=".5"/>
-            <rect x="34" y="93" width="35" height="2" rx="1" fill="#4ade80" opacity=".4"/>
-            <rect x="34" y="110" width="62" height="22" rx="5" fill="#22c55e"/>
-            <text x="65" y="125" text-anchor="middle" font-size="10" font-weight="700" fill="#0d1a0e" font-family="Inter">ORDER NOW</text>
-            <rect x="125" y="20" width="95" height="120" rx="14" fill="#1a3520" stroke="#22c55e" stroke-width="1" opacity=".7"/>
-            <rect x="135" y="30" width="75" height="45" rx="6" fill="#0d1a0e"/>
-            <rect x="139" y="34" width="67" height="37" rx="4" fill="#1f2f1a"/>
-            <circle cx="172" cy="53" r="12" fill="#f59e0b" opacity=".9"/>
-            <rect x="139" y="82" width="30" height="3" rx="1.5" fill="#22c55e" opacity=".7"/>
-            <rect x="139" y="88" width="50" height="2" rx="1" fill="#4ade80" opacity=".4"/>
-          </svg>
-        </div>
-      </div>
-      <div class="proj-body">
-        <div class="proj-tag">App UI / UX Case Study</div>
-        <div class="proj-title">READY TO EAT APP</div>
-        <p class="proj-desc">Seamless food pre-booking experience for travelers with intuitive ordering flow.</p>
-        <a href="https://www.behance.net/gurunarshima" target="_blank" class="proj-link">VIEW CASE STUDY <span style="font-size:1rem">→</span></a>
-      </div>
-    </div>
-
-    <div class="proj-card reveal d2">
-      <div class="proj-thumb" style="background:linear-gradient(135deg,#0f1a2e 0%,#071020 100%)">
-        <div class="proj-thumb-inner" style="font-size:0">
-          <svg viewBox="0 0 240 160" width="240" height="160">
-            <rect width="240" height="160" fill="#071020"/>
-            <rect x="75" y="10" width="90" height="140" rx="16" fill="#0f1a2e" stroke="#38bdf8" stroke-width="1"/>
-            <rect x="83" y="22" width="74" height="50" rx="6" fill="#071525"/>
-            <path d="M95 30 L108 47 L115 38 L122 50 L130 35 L137 45 L148 30" stroke="#38bdf8" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            <rect x="83" y="78" width="74" height="8" rx="3" fill="#1a3050"/>
-            <rect x="83" y="78" width="50" height="8" rx="3" fill="#38bdf8" opacity=".7"/>
-            <text x="120" y="105" text-anchor="middle" font-size="9" fill="#38bdf8" opacity=".8" font-family="Inter">VOTING SYSTEM</text>
-            <rect x="88" y="112" width="64" height="24" rx="6" fill="#0f2a40"/>
-            <text x="120" y="128" text-anchor="middle" font-size="9" fill="#38bdf8" font-family="Inter" font-weight="600">VOTE NOW</text>
-          </svg>
-        </div>
-      </div>
-      <div class="proj-body">
-        <div class="proj-tag">Voting UI System</div>
-        <div class="proj-title">JAN SET APP</div>
-        <p class="proj-desc">Democratic voting platform with secure authentication and real-time results.</p>
-        <a href="https://www.behance.net/gurunarshima" target="_blank" class="proj-link">VIEW CASE STUDY <span style="font-size:1rem">→</span></a>
-      </div>
-    </div>
-
-    <div class="proj-card reveal d3">
-      <div class="proj-thumb" style="background:linear-gradient(135deg,#1a2f1a 0%,#0f1a0f 100%)">
-        <div class="proj-thumb-inner" style="font-size:0">
-          <svg viewBox="0 0 240 160" width="240" height="160">
-            <rect width="240" height="160" fill="#0f1a0f"/>
-            <rect x="10" y="15" width="220" height="130" rx="10" fill="#1a2f1a"/>
-            <rect x="10" y="15" width="220" height="30" rx="10" fill="#22c55e"/>
-            <rect x="10" y="35" width="220" height="10" fill="#22c55e"/>
-            <text x="120" y="34" text-anchor="middle" font-size="10" font-weight="700" fill="white" font-family="Inter">AGRITECH MARKETPLACE</text>
-            <rect x="20" y="55" width="65" height="75" rx="8" fill="#1f3520"/>
-            <circle cx="52" cy="75" r="15" fill="#22c55e" opacity=".4"/>
-            <rect x="22" y="95" width="60" height="4" rx="2" fill="#4ade80" opacity=".6"/>
-            <rect x="22" y="102" width="40" height="3" rx="1.5" fill="#4ade80" opacity=".4"/>
-            <rect x="22" y="112" width="60" height="12" rx="4" fill="#22c55e" opacity=".8"/>
-            <rect x="95" y="55" width="65" height="75" rx="8" fill="#1f3520"/>
-            <circle cx="127" cy="75" r="15" fill="#f59e0b" opacity=".4"/>
-            <rect x="97" y="95" width="60" height="4" rx="2" fill="#4ade80" opacity=".6"/>
-            <rect x="97" y="102" width="40" height="3" rx="1.5" fill="#4ade80" opacity=".4"/>
-            <rect x="97" y="112" width="60" height="12" rx="4" fill="#22c55e" opacity=".8"/>
-            <rect x="170" y="55" width="55" height="75" rx="8" fill="#1f3520" opacity=".7"/>
-          </svg>
-        </div>
-      </div>
-      <div class="proj-body">
-        <div class="proj-tag">E-commerce UX</div>
-        <div class="proj-title">AGRITECH PLATFORM</div>
-        <p class="proj-desc">Connecting farmers with buyers through simplified marketplace experience.</p>
-        <a href="https://www.behance.net/gurunarshima" target="_blank" class="proj-link">VIEW CASE STUDY <span style="font-size:1rem">→</span></a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CASE STUDY -->
-<section id="casestudy">
-  <div class="cs-header reveal">
-    <div class="sec-label">Featured Case Study</div>
-    <h2 class="sec-title" style="margin-top:.5rem">READY TO EAT APP</h2>
-    <p class="sec-sub">Revolutionizing food pre-booking for travelers</p>
-  </div>
-  <div class="cs-content">
-    <div class="cs-2col reveal">
-      <div>
-        <div class="cs-label green">Problem</div>
-        <p class="cs-body">Users struggle to pre-book food while traveling, leading to long wait times and uncertainty about food availability at stations and stops.</p>
-        <div style="margin-top:1.5rem">
-          <div class="cs-label green">Solution</div>
-          <p class="cs-body">Designed a seamless booking and pre-order experience that allows travelers to order food in advance, track preparation status, and collect meals on arrival.</p>
-        </div>
-      </div>
-      <div>
-        <div class="cs-label white">Process</div>
-        <ul class="cs-steps">
-          <li><span class="cs-step-num">1</span>User Research &amp; Interviews</li>
-          <li><span class="cs-step-num">2</span>User Personas &amp; Journey Maps</li>
-          <li><span class="cs-step-num">3</span>Wireframes &amp; Information Architecture</li>
-          <li><span class="cs-step-num">4</span>UI Design &amp; Visual System</li>
-          <li><span class="cs-step-num">5</span>Prototype &amp; Usability Testing</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="cs-label white reveal" style="margin-bottom:1rem">Impact</div>
-    <div class="cs-metrics reveal">
-      <div class="metric-card">
-        <div class="metric-num">60<span class="metric-unit">%</span></div>
-        <div class="metric-desc">Reduced booking steps from 8 to 3</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-num">85<span class="metric-unit">%</span></div>
-        <div class="metric-desc">Improved usability score</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-num">4.8<span class="metric-star">★</span></div>
-        <div class="metric-desc">User satisfaction rating</div>
-      </div>
-    </div>
-
-    <div class="cs-label white reveal" style="margin-bottom:1rem">UI Screens</div>
-    <div class="ui-screens reveal">
-      <div class="ui-screen" style="background:linear-gradient(135deg,#1a3520,#0f1f15)">
-        <svg viewBox="0 0 80 120" width="80" height="120">
-          <rect x="5" y="5" width="70" height="110" rx="12" fill="#1a3520" stroke="#22c55e" stroke-width="1"/>
-          <rect x="12" y="15" width="56" height="35" rx="5" fill="#0d1a10"/>
-          <circle cx="40" cy="33" r="12" fill="#ff6b6b" opacity=".8"/>
-          <rect x="12" y="57" width="56" height="4" rx="2" fill="#22c55e" opacity=".6"/>
-          <rect x="12" y="64" width="40" height="3" rx="1.5" fill="#4ade80" opacity=".4"/>
-          <rect x="12" y="90" width="56" height="18" rx="5" fill="#22c55e"/>
-          <text x="40" y="103" text-anchor="middle" font-size="8" font-weight="700" fill="#0d1a10" font-family="Inter">ORDER</text>
-        </svg>
-      </div>
-      <div class="ui-screen" style="background:linear-gradient(135deg,#2d1f0a,#1a1205)">
-        <svg viewBox="0 0 80 120" width="80" height="120">
-          <rect x="5" y="5" width="70" height="110" rx="12" fill="#2d1f0a" stroke="#f59e0b" stroke-width="1"/>
-          <rect x="12" y="15" width="56" height="40" rx="5" fill="#1a1205"/>
-          <circle cx="40" cy="35" r="14" fill="#f59e0b" opacity=".6"/>
-          <path d="M32 35 L38 41 L50 29" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <rect x="12" y="62" width="56" height="3" rx="1.5" fill="#f59e0b" opacity=".6"/>
-          <rect x="12" y="68" width="40" height="3" rx="1.5" fill="#f59e0b" opacity=".4"/>
-          <rect x="12" y="93" width="56" height="16" rx="5" fill="#f59e0b"/>
-          <text x="40" y="105" text-anchor="middle" font-size="8" font-weight="700" fill="#1a1205" font-family="Inter">TRACK</text>
-        </svg>
-      </div>
-      <div class="ui-screen" style="background:linear-gradient(135deg,#0f1a2e,#071020)">
-        <svg viewBox="0 0 80 120" width="80" height="120">
-          <rect x="5" y="5" width="70" height="110" rx="12" fill="#0f1a2e" stroke="#38bdf8" stroke-width="1"/>
-          <rect x="12" y="15" width="25" height="35" rx="4" fill="#071525"/>
-          <rect x="43" y="15" width="25" height="16" rx="4" fill="#071525"/>
-          <rect x="43" y="34" width="25" height="16" rx="4" fill="#071525"/>
-          <rect x="12" y="57" width="56" height="3" rx="1.5" fill="#38bdf8" opacity=".6"/>
-          <rect x="12" y="63" width="35" height="3" rx="1.5" fill="#38bdf8" opacity=".4"/>
-          <rect x="12" y="93" width="56" height="16" rx="5" fill="#38bdf8"/>
-          <text x="40" y="105" text-anchor="middle" font-size="8" font-weight="700" fill="#071525" font-family="Inter">COLLECT</text>
-        </svg>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WALKING / SKILLS SCROLL SECTION -->
-<div id="walking">
-  <div class="walk-sticky" id="walkSticky">
-    <div class="walk-bg-line"></div>
-    <div class="walk-dots-row" id="walkDots"></div>
-
-    <div class="walk-section-title">
-      <div class="sec-label" style="display:block;margin-bottom:.5rem">What I Do</div>
-      <h2 style="font-size:2.2rem;font-weight:800;letter-spacing:-.03em">My Design Process</h2>
-      <p style="color:var(--muted);font-size:.88rem;margin-top:.4rem">Scroll to explore my workflow</p>
-    </div>
-
-    <!-- WALKER CHARACTER -->
-    <div class="walker" id="walker" style="left:-100px">
-      <svg class="walker-svg" viewBox="0 0 60 88" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="ws1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#B8F5E0"/><stop offset="100%" stop-color="#6EE7B7"/></linearGradient>
-          <linearGradient id="ws2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4B6B8A"/><stop offset="100%" stop-color="#2D4459"/></linearGradient>
-          <linearGradient id="ws3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#FFD4A8"/><stop offset="100%" stop-color="#F5A97F"/></linearGradient>
-        </defs>
-        <!-- head -->
-        <ellipse cx="30" cy="13" rx="13" ry="14" fill="url(#ws3)"/>
-        <ellipse cx="30" cy="4" rx="13" ry="7" fill="#1a1209"/>
-        <ellipse cx="26" cy="13" rx="3.5" ry="4" fill="#2C1810"/>
-        <ellipse cx="34" cy="13" rx="3.5" ry="4" fill="#2C1810"/>
-        <circle cx="27" cy="12" r="1.2" fill="white"/>
-        <circle cx="35" cy="12" r="1.2" fill="white"/>
-        <path d="M26 19 Q30 23 34 19" stroke="#d4956a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-        <rect x="22" y="9" width="10" height="7" rx="3" fill="none" stroke="#64748B" stroke-width="1.5"/>
-        <rect x="28" y="9" width="10" height="7" rx="3" fill="none" stroke="#64748B" stroke-width="1.5"/>
-        <line x1="28" y1="12" x2="22" y2="12" stroke="#64748B" stroke-width="1.5"/>
-        <!-- earbuds -->
-        <circle cx="17" cy="15" r="2.5" fill="#22c55e"/>
-        <!-- body -->
-        <g class="bd">
-          <rect x="18" y="28" width="24" height="22" rx="7" fill="url(#ws1)"/>
-          <!-- arm L -->
-          <rect class="al" x="6" y="30" width="14" height="16" rx="6" fill="url(#ws1)" transform-origin="13px 30px"/>
-          <!-- arm R -->
-          <rect class="ar" x="40" y="30" width="14" height="16" rx="6" fill="url(#ws1)" transform-origin="47px 30px"/>
-          <!-- neck -->
-          <rect x="24" y="22" width="12" height="10" rx="5" fill="url(#ws3)"/>
-          <!-- leg L -->
-          <rect class="ll" x="19" y="49" width="10" height="26" rx="5" fill="url(#ws2)" transform-origin="24px 49px"/>
-          <ellipse cx="24" cy="76" rx="8" ry="4" fill="#1a2535"/>
-          <!-- leg R -->
-          <rect class="lr" x="31" y="49" width="10" height="26" rx="5" fill="url(#ws2)" transform-origin="36px 49px"/>
-          <ellipse cx="36" cy="76" rx="8" ry="4" fill="#1a2535"/>
-        </g>
-      </svg>
-    </div>
-
-    <!-- CARDS TRACK -->
-    <div class="walk-track" id="walkTrack">
-      <div class="walk-card" id="wc0">
-        <div class="wc-icon" style="background:rgba(74,222,128,0.1)">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#4ade80" stroke-width="1.5"/><path d="M7 10l2 2 4-4" stroke="#4ade80" stroke-width="1.5" stroke-linecap="round"/></svg>
-        </div>
-        <div class="wc-num">01</div>
-        <div class="wc-title">UX Research</div>
-        <p class="wc-desc">Deep user empathy through interviews, surveys, and behavioral analysis that drives real design decisions.</p>
-      </div>
-      <div class="walk-card" id="wc1">
-        <div class="wc-icon" style="background:rgba(56,189,248,0.1)">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1.5" stroke="#38bdf8" stroke-width="1.5"/><rect x="11" y="3" width="6" height="6" rx="1.5" stroke="#38bdf8" stroke-width="1.5"/><rect x="3" y="11" width="6" height="6" rx="1.5" stroke="#38bdf8" stroke-width="1.5"/><rect x="11" y="11" width="6" height="6" rx="1.5" stroke="#38bdf8" stroke-width="1.5"/></svg>
-        </div>
-        <div class="wc-num">02</div>
-        <div class="wc-title">Wireframing</div>
-        <p class="wc-desc">Rapid low-fi wireframes and information architecture that map the ideal user journey before visual design.</p>
-      </div>
-      <div class="walk-card" id="wc2">
-        <div class="wc-icon" style="background:rgba(167,139,250,0.1)">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 12l4-4 3 3 5-7" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <div class="wc-num">03</div>
-        <div class="wc-title">UI Design</div>
-        <p class="wc-desc">Pixel-perfect visual design with strong typography, color systems, and component libraries in Figma.</p>
-      </div>
-      <div class="walk-card" id="wc3">
-        <div class="wc-icon" style="background:rgba(245,158,11,0.1)">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 3v14M3 10h14" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round"/></svg>
-        </div>
-        <div class="wc-num">04</div>
-        <div class="wc-title">Prototyping</div>
-        <p class="wc-desc">Interactive high-fidelity prototypes that feel real, enabling fast iteration and meaningful stakeholder feedback.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- SKILLS -->
-<section id="skills">
-  <div class="sec-label reveal">Expertise</div>
-  <h2 class="sec-title reveal d1">Skills &amp; Tools</h2>
-  <p class="sec-sub reveal d2">My expertise across the design spectrum</p>
-  <div class="skills-grid">
-    <div class="skill-card reveal d1">
-      <div class="skill-icon">
-        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8" stroke="#4ade80" stroke-width="1.5"/><circle cx="11" cy="11" r="3" fill="#4ade80" opacity=".5"/><path d="M11 3v2M11 17v2M3 11h2M17 11h2" stroke="#4ade80" stroke-width="1.5" stroke-linecap="round"/></svg>
-      </div>
-      <div class="skill-name">UX Design</div>
-      <div class="skill-tags">
-        <span class="skill-tag">User Research</span>
-        <span class="skill-tag">Wireframing</span>
-        <span class="skill-tag">Usability Testing</span>
-        <span class="skill-tag">Information Architecture</span>
-      </div>
-    </div>
-    <div class="skill-card reveal d2">
-      <div class="skill-icon">
-        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="3" width="16" height="16" rx="4" stroke="#38bdf8" stroke-width="1.5"/><path d="M7 11h8M11 7v8" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round"/></svg>
-      </div>
-      <div class="skill-name">UI Design</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Visual Design</span>
-        <span class="skill-tag">Typography</span>
-        <span class="skill-tag">Responsive Design</span>
-        <span class="skill-tag">Design Systems</span>
-      </div>
-    </div>
-    <div class="skill-card reveal d3">
-      <div class="skill-icon">
-        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 6h14M4 11h14M4 16h8" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round"/></svg>
-      </div>
-      <div class="skill-name">Tools</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Figma</span>
-        <span class="skill-tag">Adobe XD</span>
-        <span class="skill-tag">Framer</span>
-        <span class="skill-tag">Protopie</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="about-grid">
-    <div class="about-text">
-      <div class="sec-label reveal">About Me</div>
-      <h2 class="sec-title reveal d1">About Me</h2>
-      <p class="about-p reveal d2">I'm a UI/UX Designer with experience in edtech, agritech, and AR/VR. I focus on solving real-world problems through user-centered design.</p>
-      <p class="about-p reveal d2">With a passion for creating meaningful digital experiences, I combine research, strategy, and creativity to deliver products that users love.</p>
-      <div class="exp-highlights reveal d3">
-        <div class="exp-title">Experience Highlights</div>
-        <div class="exp-items">
-          <div class="exp-item"><span class="exp-check">✓</span>3+ years designing user-centered products</div>
-          <div class="exp-item"><span class="exp-check">✓</span>Worked across edtech, agritech, and AR/VR domains</div>
-          <div class="exp-item"><span class="exp-check">✓</span>Led end-to-end design projects from research to launch</div>
-        </div>
-      </div>
-      <button class="btn-green reveal d4" style="margin-top:2rem;cursor:none">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v8M3 7l4 4 4-4" stroke="#0d1117" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        DOWNLOAD RESUME
-      </button>
-    </div>
-    <div class="about-img-wrap reveal d2">
-      <div class="about-img-inner">
-        <!-- DESK SETUP SVG -->
-        <svg class="desk-svg" viewBox="0 0 400 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="dsk" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1c2e3e"/><stop offset="100%" stop-color="#0f1a28"/></linearGradient>
-            <linearGradient id="mon" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a2a3a"/><stop offset="100%" stop-color="#0d1520"/></linearGradient>
-            <linearGradient id="sc1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0d2035"/><stop offset="100%" stop-color="#05101e"/></linearGradient>
-            <radialGradient id="glo" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="rgba(74,222,128,0.08)"/><stop offset="100%" stop-color="transparent"/></radialGradient>
-          </defs>
-          <!-- room ambient -->
-          <rect width="400" height="280" fill="#0a1520"/>
-          <ellipse cx="200" cy="140" rx="200" ry="140" fill="url(#glo)"/>
-          <!-- desk surface -->
-          <rect x="20" y="195" width="360" height="18" rx="4" fill="url(#dsk)"/>
-          <rect x="30" y="213" width="12" height="60" rx="4" fill="#0d1520"/>
-          <rect x="358" y="213" width="12" height="60" rx="4" fill="#0d1520"/>
-          <!-- MAIN MONITOR -->
-          <rect x="90" y="80" width="220" height="140" rx="8" fill="url(#mon)" stroke="#1e3a52" stroke-width="1.5"/>
-          <rect x="98" y="88" width="204" height="120" rx="5" fill="url(#sc1)"/>
-          <!-- code on screen -->
-          <rect x="106" y="96" width="60" height="3" rx="1.5" fill="#4ade80" opacity=".7"/>
-          <rect x="106" y="103" width="100" height="2.5" rx="1" fill="#38bdf8" opacity=".55"/>
-          <rect x="106" y="109" width="75" height="2.5" rx="1" fill="#a78bfa" opacity=".5"/>
-          <rect x="106" y="115" width="90" height="2.5" rx="1" fill="#4ade80" opacity=".4"/>
-          <rect x="106" y="121" width="50" height="2.5" rx="1" fill="#38bdf8" opacity=".4"/>
-          <rect x="106" y="127" width="80" height="2.5" rx="1" fill="#a78bfa" opacity=".35"/>
-          <rect x="106" y="133" width="65" height="2.5" rx="1" fill="#4ade80" opacity=".35"/>
-          <rect x="106" y="143" width="188" height="50" rx="6" fill="rgba(74,222,128,0.06)"/>
-          <rect x="114" y="150" width="80" height="8" rx="4" fill="rgba(74,222,128,0.15)"/>
-          <rect x="114" y="163" width="140" height="6" rx="3" fill="rgba(74,222,128,0.08)"/>
-          <rect x="114" y="173" width="110" height="6" rx="3" fill="rgba(74,222,128,0.08)"/>
-          <!-- monitor stand -->
-          <rect x="192" y="220" width="16" height="20" rx="3" fill="#0d1520"/>
-          <rect x="178" y="238" width="44" height="6" rx="3" fill="#0d1520"/>
-          <!-- SIDE MONITOR left -->
-          <rect x="18" y="100" width="68" height="98" rx="6" fill="url(#mon)" stroke="#1e3a52" stroke-width="1" opacity=".85"/>
-          <rect x="24" y="106" width="56" height="80" rx="4" fill="url(#sc1)"/>
-          <rect x="28" y="112" width="35" height="2.5" rx="1" fill="#38bdf8" opacity=".6"/>
-          <rect x="28" y="118" width="45" height="2" rx="1" fill="#4ade80" opacity=".4"/>
-          <rect x="28" y="123" width="30" height="2" rx="1" fill="#a78bfa" opacity=".4"/>
-          <rect x="28" y="132" width="48" height="40" rx="4" fill="rgba(56,189,248,0.06)"/>
-          <rect x="34" y="140" width="36" height="6" rx="3" fill="rgba(56,189,248,0.2)"/>
-          <rect x="34" y="150" width="28" height="4" rx="2" fill="rgba(56,189,248,0.12)"/>
-          <rect x="44" y="198" width="10" height="18" rx="2" fill="#0d1520"/>
-          <rect x="36" y="214" width="26" height="4" rx="2" fill="#0d1520"/>
-          <!-- SIDE MONITOR right -->
-          <rect x="314" y="100" width="68" height="98" rx="6" fill="url(#mon)" stroke="#1e3a52" stroke-width="1" opacity=".85"/>
-          <rect x="320" y="106" width="56" height="80" rx="4" fill="url(#sc1)"/>
-          <rect x="324" y="112" width="40" height="2.5" rx="1" fill="#f59e0b" opacity=".5"/>
-          <rect x="324" y="118" width="30" height="2" rx="1" fill="#4ade80" opacity=".4"/>
-          <rect x="324" y="123" width="45" height="2" rx="1" fill="#38bdf8" opacity=".35"/>
-          <rect x="324" y="132" width="48" height="40" rx="4" fill="rgba(245,158,11,0.05)"/>
-          <path d="M328 152 L340 140 L352 148 L365 132 L370 155" stroke="#f59e0b" stroke-width="1.5" fill="none" opacity=".6"/>
-          <rect x="346" y="198" width="10" height="18" rx="2" fill="#0d1520"/>
-          <rect x="338" y="214" width="26" height="4" rx="2" fill="#0d1520"/>
-          <!-- KEYBOARD -->
-          <rect x="130" y="208" width="140" height="20" rx="4" fill="#0d1a26" stroke="#1e3a52" stroke-width="1"/>
-          <rect x="136" y="212" width="8" height="5" rx="1.5" fill="#1a2d3e"/>
-          <rect x="147" y="212" width="8" height="5" rx="1.5" fill="#1a2d3e"/>
-          <rect x="158" y="212" width="8" height="5" rx="1.5" fill="#1a2d3e"/>
-          <rect x="169" y="212" width="8" height="5" rx="1.5" fill="#1a2d3e"/>
-          <rect x="180" y="212" width="8" height="5" rx="1.5" fill="#1a2d3e"/>
-          <rect x="191" y="212" width="8" height="5" rx="1.5" fill="#1a2d3e"/>
-          <rect x="202" y="212" width="8" height="5" rx="1.5" fill="#1a2d3e"/>
-          <rect x="213" y="212" width="8" height="5" rx="1.5" fill="#1a2d3e"/>
-          <rect x="224" y="212" width="8" height="5" rx="1.5" fill="#1a2d3e"/>
-          <rect x="152" y="219" width="50" height="5" rx="2" fill="#4ade80" opacity=".15"/>
-          <rect x="205" y="219" width="30" height="5" rx="2" fill="#1a2d3e"/>
-          <!-- MOUSE -->
-          <rect x="282" y="208" width="26" height="34" rx="13" fill="#0d1a26" stroke="#1e3a52" stroke-width="1"/>
-          <line x1="295" y1="208" x2="295" y2="218" stroke="#1e3a52" stroke-width="1"/>
-          <!-- MIC ARM -->
-          <path d="M60 190 Q60 150 80 130 Q100 110 110 90" stroke="#1e3a52" stroke-width="3" fill="none" stroke-linecap="round"/>
-          <rect x="100" y="82" width="18" height="28" rx="9" fill="#1a2d3e" stroke="#253d52" stroke-width="1"/>
-          <!-- glow under monitors -->
-          <ellipse cx="200" cy="200" rx="100" ry="6" fill="rgba(74,222,128,0.06)"/>
-        </svg>
-      </div>
-      <div class="about-img-badge">
-        <div class="badge-num">3+</div>
-        <div class="badge-text">Years of<br>Experience</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="sec-label reveal">Get In Touch</div>
-  <h2 class="contact-title reveal d1">Let's build something<br>amazing together ⚡</h2>
-  <p class="contact-sub reveal d2">Have a project in mind? Let's discuss how we can work together.</p>
-  <div class="contact-row reveal d2">
-    <a href="mailto:gurunarasimha26@gmail.com" class="contact-item">
-      <div class="contact-icon">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="2" stroke="#4ade80" stroke-width="1.5"/><path d="M2 5l6 5 6-5" stroke="#4ade80" stroke-width="1.5" stroke-linecap="round"/></svg>
-      </div>
-      <div><div style="font-size:.7rem;color:var(--muted);margin-bottom:2px">Email</div>gurunarasimha26@gmail.com</div>
-    </a>
-    <a href="tel:9309163639" class="contact-item">
-      <div class="contact-icon">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 3a1 1 0 011-1h2l1 3-1.5 1.5a9 9 0 004 4L11 9l3 1v2a1 1 0 01-1 1C6 13 3 7 3 3z" stroke="#4ade80" stroke-width="1.5" stroke-linejoin="round"/></svg>
-      </div>
-      <div><div style="font-size:.7rem;color:var(--muted);margin-bottom:2px">Phone</div>9309163639</div>
-    </a>
-  </div>
-  <div class="socials reveal d3">
-    <a href="https://www.linkedin.com/in/guru-narasimha-b61536281/" target="_blank" class="social-btn" title="LinkedIn">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M5 7v4M5 5.5v.01M8 11V8.5c0-1 .5-1.5 1.5-1.5s1.5.5 1.5 1.5V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-    </a>
-    <a href="https://www.behance.net/gurunarshima" target="_blank" class="social-btn" title="Behance">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4h5c1.5 0 2.5.8 2.5 2s-.8 1.5-1.5 1.8C9.5 8 10.5 9 10.5 10.5c0 1.8-1.3 2.5-3 2.5H2V4z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M5 7.5h2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M10 5.5h4M10.5 8.5c0-1.5 1-2.5 2-2.5s2 1 2 2.5H10.5z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
-    </a>
-    <a href="#" class="social-btn" title="Instagram">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="3.5" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="8" r="2.5" stroke="currentColor" stroke-width="1.5"/><circle cx="11.5" cy="4.5" r=".75" fill="currentColor"/></svg>
-    </a>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="foot-logo">GN.</div>
-  <p>© 2026 Guru Narasimha | UI/UX Designer</p>
-  <p style="color:var(--muted);font-size:.75rem">Designed with ♥</p>
-</footer>
+<footer><div class="wrap">
+<div class="fg"><div><h2>Designing products people enjoy using.</h2>
+<div class="ib"><a href="mailto:gurunarasimha26@gmail.com" aria-label="Email Guru"><svg class="ic"><use href="#i-mail"/></svg></a><a href="https://www.behance.net/gurunarshima" target="_blank" rel="noopener" aria-label="Guru on Behance"><svg class="ic f"><use href="#i-be"/></svg></a><a href="https://drive.google.com/drive/folders/1bjinnE8N2tnVYhzngi_IP73ryw7fA0Sc?usp=drive_link" target="_blank" rel="noopener" aria-label="Download CV"><svg class="ic"><use href="#i-dl"/></svg></a></div></div>
+<div><h4>/Quick links</h4><a href="#hero">Home</a><a href="#about">About me</a><a href="#skills">Skills</a><a href="#work">Work</a><a href="#contact">Contact</a></div>
+<div><h4>/Contact</h4><a class="fl" href="mailto:gurunarasimha26@gmail.com"><svg class="ic"><use href="#i-mail"/></svg>gurunarasimha26@gmail.com</a><a class="fl" href="https://www.behance.net/gurunarshima" target="_blank" rel="noopener"><svg class="ic f"><use href="#i-be"/></svg>behance.net/gurunarshima</a><a class="fl" href="https://drive.google.com/drive/folders/1bjinnE8N2tnVYhzngi_IP73ryw7fA0Sc?usp=drive_link" target="_blank" rel="noopener"><svg class="ic"><use href="#i-dl"/></svg>Download my CV</a></div></div>
+<div class="wm">Guru</div>
+<div class="cp"><span>©2026 Guru Narasimha · UI/UX &amp; Product Designer</span><a class="fl" href="#hero">Back to top <svg class="ic"><use href="#i-up"/></svg></a></div>
+</div></footer>
 
 <script>
-// CURSOR
-const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
-(function animRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing)})();
-
-// HERO CHAR PARALLAX
-const heroChar=document.getElementById('heroChar');
-document.addEventListener('mousemove',e=>{
-  const dx=(e.clientX/window.innerWidth-.5)*18;
-  const dy=(e.clientY/window.innerHeight-.5)*12;
-  heroChar.style.transform=`rotate(${dx*.4}deg) translateY(${dy*.5}px)`;
-});
-
-// REVEAL ON SCROLL
-const reveals=document.querySelectorAll('.reveal');
-const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('up')})},{threshold:.15});
-reveals.forEach(el=>io.observe(el));
-
-// WALKING SECTION
-const walkSection=document.getElementById('walking');
-const walker=document.getElementById('walker');
-const walkTrack=document.getElementById('walkTrack');
-const cards=Array.from(walkTrack.querySelectorAll('.walk-card'));
-const dotsRow=document.getElementById('walkDots');
-
-// Create dots
-for(let i=0;i<28;i++){const d=document.createElement('div');d.className='walk-dot';dotsRow.appendChild(d);}
-
-function onScroll(){
-  const rect=walkSection.getBoundingClientRect();
-  const total=walkSection.offsetHeight - window.innerHeight;
-  const scrolled=-rect.top;
-  if(scrolled<0||scrolled>total)return;
-  const progress=Math.min(1,Math.max(0,scrolled/total));
-
-  // Walker moves from -100 to window.innerWidth+80
-  const walkerX=-100+(window.innerWidth+180)*progress;
-  walker.style.left=walkerX+'px';
-
-  // Walking animation
-  if(progress>0.02&&progress<0.98){
-    walker.querySelector('.walker-svg').classList.add('walking');
-  } else {
-    walker.querySelector('.walker-svg').classList.remove('walking');
-  }
-
-  // Track moves opposite direction (scroll-linked horizontal pan)
-  const trackX = -progress * (walkTrack.scrollWidth - window.innerWidth + 300);
-  walkTrack.style.transform=`translateX(${trackX}px)`;
-
-  // Cards appear based on progress
-  const cardTriggers=[0.1,0.3,0.55,0.75];
-  cards.forEach((c,i)=>{
-    if(progress>cardTriggers[i]) c.classList.add('show');
-    else c.classList.remove('show');
-  });
-}
-
-window.addEventListener('scroll',onScroll,{passive:true});
-onScroll();
-
-// NAV scroll effect
-const navbar=document.querySelector('nav');
-window.addEventListener('scroll',()=>{
-  if(window.scrollY>60){navbar.style.borderBottomColor='rgba(74,222,128,0.15)'}
-  else{navbar.style.borderBottomColor='rgba(255,255,255,0.08)'}
-},{passive:true});
-
-// SMOOTH SCROLL for nav
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click',e=>{
-    const t=document.querySelector(a.getAttribute('href'));
-    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'})}
-  });
-});
+document.documentElement.classList.add('js');
+const $=s=>document.querySelector(s);
+// hero letters
+document.querySelectorAll('.big .w').forEach((w,k)=>{let i=k*5;w.innerHTML=[...w.dataset.t].map(ch=>`<span class="c" style="--i:${i++}">${ch}</span>`).join('')});
+// marquee
+const line='Crafting user-centered digital experiences across AR/VR, game design, crypto, e-commerce and e-learning<i>✦</i>';
+$('#mq').innerHTML=`<span>${line}</span><span>${line}</span><span>${line}</span><span>${line}</span>`;
+const t2='Figma<i>✦</i>Adobe XD<i>✦</i>Framer<i>✦</i>Balsamiq<i>✦</i>SketchUp<i>✦</i>Canva<i>✦</i>3D Modeling<i>✦</i>';$('#mq2').innerHTML=`<span>${t2}</span>`.repeat(4);
+// bars
+$('#bars').innerHTML=[['Figma & Prototyping',95],['UI/UX Design',92],['Brand & Visual Design',88],['User Research & Testing',85],['Design Systems',82],['AR/VR & 3D Design',80]].map(([a,b])=>`<div class="bar"><div><span>${a}</span><span>${b}%</span></div><i style="--s:${b/100}"></i></div>`).join('');
+// projects
+const P=[['AR/VR','Drive Sync — Car Infotainment','An in-car infotainment interface with 3D user flows, designed to be easy to read at a glance while driving.',['Figma','3D Design','Automotive UI'],250,'https://www.behance.net/gallery/247221999/Drive-Sync-Car-Infotainment-Experience'],
+['Security','Empower Your Cybersecurity','A dark security dashboard that turns live threat data into clear, prioritised alerts.',['Figma','Dashboard'],215,'https://www.behance.net/gallery/223706209/Empower-Your-Cybersecurity'],
+['Civic','Redefining Digital Voting','An accessible digital voting flow that makes every step of casting a vote clear and verifiable.',['Adobe XD','Accessibility'],150,'https://www.behance.net/gallery/223469941/Redefining-Digital-Voting-Jan-Setu'],
+['Case study','Zomato — Food Delivery UX','A UX case study that simplifies the onboarding and checkout flows.',['Figma','UX Research'],8,'https://www.behance.net/gallery/222297929/Revolutionizing-Food-Delivery-Zomato-UIUX-Case-Study'],
+['Branding','Coffee Beans — App & Brand','A coffee shop app with warm branding and a fast, simple way to order.',['Figma','Branding'],25,'https://www.behance.net/gallery/228061371/Coffee-Beans'],
+['Agritech','Agritech E-Commerce Platform','A farm-to-table marketplace with order management and delivery tracking for agriculture products.',['Figma','E-Commerce'],130,'https://www.behance.net/gallery/211581045/Green-leafs-Hub-Website-presentation']];
+const MK=[
+`<div class="dv dk wide" style="flex-direction:row"><div style="flex:1.6;display:flex;flex-direction:column;gap:1.4cqw"><div class="rw sp"><b>Navigation</b><span style="opacity:.6">9:41</span></div><svg viewBox="0 0 100 52" style="flex:1;border-radius:2cqw;background:#161b26"><path d="M8 44C28 40 24 20 46 24S70 10 92 8" fill="none" stroke-width="2.4" stroke-linecap="round" style="stroke:hsl(var(--h) 80% 65%)"/><circle cx="92" cy="8" r="3.2" fill="#fff"/></svg><div class="rw"><span class="dc"></span>Turn left in 300 m</div></div><div style="flex:1;display:flex;flex-direction:column;gap:1.4cqw"><div class="cd" style="align-items:center;justify-content:center"><b style="font-size:9cqw;line-height:1">72</b><span style="opacity:.6">km/h</span></div><div class="cd"><span>Now playing</span><i class="pl" style="flex:none"></i></div><div class="cd"><span>Cabin 22°C</span><i class="pl" style="flex:none;width:60%"></i></div></div></div>`,
+`<div class="dv dk wide"><div class="rw sp"><b>Threat monitor</b><span class="lv">Live</span></div><div class="rw"><div class="cd"><b style="font-size:4.4cqw">3</b>Open alerts</div><div class="cd"><b style="font-size:4.4cqw">Low</b>Risk level</div><div class="cd"><b style="font-size:4.4cqw">On</b>Firewall</div></div><svg viewBox="0 0 100 26" preserveAspectRatio="none" style="flex:1;background:#161b26;border-radius:2cqw"><polyline points="0,20 12,16 24,18 36,9 48,13 60,6 72,12 84,4 100,8" fill="none" stroke-width="1.6" style="stroke:hsl(var(--h) 80% 65%)"/></svg><div class="rw"><span class="dc" style="background:#f5555d"></span>Unusual login blocked<i class="pl"></i></div><div class="rw"><span class="dc" style="background:#f0b429"></span>Update pending<i class="pl"></i></div></div>`,
+`<div class="dv ph"><b>Cast your vote</b><span style="opacity:.6">Step 2 of 3</span><div class="cd rw" style="flex:none"><span class="dc"></span>Candidate A</div><div class="cd rw ac" style="flex:none"><span class="dc" style="background:#fff"></span>Candidate B</div><div class="cd rw" style="flex:none"><span class="dc"></span>Candidate C</div><div style="flex:1"></div><div class="rw" style="opacity:.7"><svg class="ic"><use href="#i-shield"/></svg>Your vote is encrypted</div><div class="bt">Confirm vote</div></div>`,
+`<div class="dv ph"><div class="rw sp"><b>Deliver to Home</b><span class="dc"></span></div><div class="cd rw" style="flex:none;opacity:.8">Search restaurants or dishes</div><div class="rw"><span class="lv">All</span><span class="op">Offers</span><span class="op">Fast</span></div><div class="rw" style="flex:1;align-items:stretch"><i class="sq"></i><i class="sq" style="--o:30"></i></div><b>Your order · 2 items</b><div class="bt">Go to checkout</div></div>`,
+`<div class="dv ph"><div class="rw sp"><b>Coffee Beans</b><span class="dc"></span></div><div style="flex:1;display:grid;place-items:center"><svg viewBox="0 0 60 60" style="width:76%"><ellipse cx="30" cy="52" rx="22" ry="4" fill="#0002"/><path d="M12 18h36l-3 28c-.3 3-2.5 5-5.5 5h-19c-3 0-5.2-2-5.5-5z" style="fill:hsl(var(--h) 65% 42%)"/><path d="M48 24h4a5 5 0 0 1 0 12h-5" fill="none" stroke-width="3" style="stroke:hsl(var(--h) 65% 42%)"/><path d="M14 18c2-7 8-9 16-9s14 2 16 9z" fill="#f4e6d4"/></svg></div><b>Flat white</b><div class="rw"><span class="lv">S</span><span class="op">M</span><span class="op">L</span></div><div class="bt">Add to order</div></div>`,
+`<div class="dv wide"><div class="rw sp"><b>Farm Fresh Market</b><span class="lv">Cart · 2</span></div><div class="rw" style="flex:1;align-items:stretch"><i class="sq"></i><i class="sq" style="--o:25"></i><i class="sq" style="--o:-20"></i><i class="sq" style="--o:10"></i></div><div class="rw"><span>Order placed</span><i class="pl"></i><span>Packed</span><i class="pl"></i><span style="opacity:.5">Delivered</span></div></div>`];
+const CV=['https://mir-s3-cdn-cf.behance.net/projects/404/8fe4fc247221999.Y3JvcCw1MTEzLDQwMDAsMzI5LDA.png','https://mir-s3-cdn-cf.behance.net/projects/404/9eaec5223706209.Y3JvcCwxMTUzLDkwMiwyMDgsMA.png','https://mir-s3-cdn-cf.behance.net/projects/404/bc2c20223469941.6aafcb00f37d1.png','https://mir-s3-cdn-cf.behance.net/projects/404/b5f2ac222297929.Y3JvcCw1MjM2LDQwOTYsMTgxLDA.png','https://mir-s3-cdn-cf.behance.net/projects/404/c4e306228061371.Y3JvcCw0NTQxLDM1NTIsNjYzLDA.png','https://mir-s3-cdn-cf.behance.net/projects/404/d52967211581045.69e39301033e8.png'];// real covers from behance.net/gurunarshima; referrerpolicy="no-referrer" below helps them load when hotlinked
+// project gallery: 3 images per project. Placeholder art is generated below.
+// To use your real Behance screens, list paths here, e.g. GI[0]=['images/drive-1.jpg','images/drive-2.jpg','images/drive-3.jpg']
+const GI={};
+const GL=[[1,['Drive Sync','Live navigation','Companion app']],[1,['Cyber Shield','Threat monitor','Alert flow']],[0,['Digital Voting','Ballot review','Voter flow']],[0,['Food Delivery','Checkout','Onboarding']],[0,['Coffee Beans','Menu','Order tracking']],[0,['Farm Fresh','Marketplace','Order tracking']]];
+const art=(i,k)=>{const h=P[i][4],[dk,L]=GL[i],l=L[k],bg=dk?'#0e1117':'#fff',fg=dk?'#e9edf5':'#16171a',a=`hsl(${h} 75% 55%)`,b=`hsl(${h+50} 80% 66%)`,
+r=(x,y,w,q,c,f,o=1)=>`<rect x="${x}" y="${y}" width="${w}" height="${q}" rx="${c}" fill="${f}" opacity="${o}"/>`,
+t=(x,y,z,s,w,f,o=1)=>`<text x="${x}" y="${y}" font-size="${z}" font-weight="${w}" fill="${f}" opacity="${o}">${s}</text>`;let s;
+if(k==0)s=`<circle cx="330" cy="60" r="80" fill="#fff" opacity=".18"/><circle cx="50" cy="220" r="60" fill="#fff" opacity=".14"/>`+t(24,125,34,l,800,'#fff')+t(24,150,14,P[i][0]+' · '+P[i][3][0],500,'#fff',.85)+r(24,172,92,30,15,'#fff')+t(42,192,13,'View case',700,'#111');
+else if(k==1)s=r(0,0,400,250,0,dk?'#161b26':'#eef0f4')+r(16,16,368,218,14,bg)+t(32,42,14,l,700,fg)+r(320,28,48,18,9,a)+[0,1,2].map(n=>r(32+n*114,54,106,44,10,fg,.07)+t(42+n*114,76,17,['3','Low','98%'][n],800,fg)+r(42+n*114,84,52,5,3,fg,.2)).join('')+r(32,108,336,84,10,fg,.05)+`<polyline points="44,178 92,158 140,166 188,134 236,146 284,122 332,130 356,124" fill="none" stroke="${a}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>`+r(32,202,200,7,4,fg,.16)+r(32,216,140,7,4,fg,.1);
+else s=r(0,0,400,250,0,dk?`hsl(${h} 35% 16%)`:`hsl(${h} 60% 92%)`)+[0,1].map(n=>{const x=76+n*136,y=n?30:10;return r(x,y,112,216,18,dk?'#2a2f3a':'#16171a')+r(x+4,y+4,104,208,15,bg)+t(x+14,y+30,11,n?'Summary':l,700,fg)+r(x+14,y+40,84,26,8,fg,.08)+r(x+14,y+72,84,26,8,a)+r(x+14,y+104,84,26,8,fg,.08)+r(x+14,y+138,56,6,3,fg,.2)+r(x+14,y+170,84,26,13,a)+t(x+32,y+187,10,'Continue',700,'#fff')}).join('');
+return 'data:image/svg+xml;utf8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" font-family="Helvetica,Arial,sans-serif"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs><rect width="400" height="250" fill="url(#g)"/>${s}</svg>`)};
+const GLR=i=>`<div class="gl">${[0,1,2].map(k=>{const f=art(i,k),u=((GI[i]||[])[k])||CV[i]||'';return `<img src="${u||f}" data-f="${f}" referrerpolicy="no-referrer" crossorigin="anonymous" onerror="this.onerror=null;this.src=this.dataset.f" alt="${P[i][1]} — ${GL[i][1][k]}" loading="lazy" decoding="async">`}).join('')}</div>`;
+const CH=[['Route updated','3D flow ready'],['Threat detected','Alert resolved'],['Vote submitted ✓','Identity verified'],['Order confirmed','Arrives soon'],['Freshly brewed ☕','Order ready'],['Order shipped','Farm-fresh']];
+$('#grid').innerHTML=P.map(([c,t,d,g,h,url],i)=>`<a class="pj" style="--h:${h};--k:${i}" href="${url}" target="_blank" rel="noopener"><div class="tx rv"><span class="tg">${c}</span><h3>${t}</h3><p>${d}</p><div class="tags">${g.map(x=>`<span class="tg">${x}</span>`).join('')}</div><span class="go">View on Behance <i>↗</i></span></div><div class="vs"><div class="im"><div class="mk" data-sp="30">${MK[i]}</div>${CV[i]?`<img data-sp="70" src="${CV[i]}" referrerpolicy="no-referrer" crossorigin="anonymous" alt="${t}" loading="lazy" decoding="async" onerror="this.remove()">`:''}<span class="ch c1">${CH[i][0]}</span><span class="ch c2">${CH[i][1]}</span></div>${GLR(i)}</div></a>`).join('');
+document.querySelectorAll('.pj .im').forEach(el=>el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect();el.style.setProperty('--x',(e.clientX-r.left)/r.width*100+'%');el.style.setProperty('--y',(e.clientY-r.top)/r.height*100+'%')}));
+// tilt, magnetic buttons, split headings
+document.querySelectorAll('.pj .im').forEach(el=>{el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect(),a=(e.clientX-r.left)/r.width-.5,b=(e.clientY-r.top)/r.height-.5;el.style.transform=`perspective(900px) rotateY(${a*8}deg) rotateX(${-b*8}deg)`});el.addEventListener('pointerleave',()=>el.style.transform='')});
+document.querySelectorAll('.btn').forEach(b=>{b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.22}px,${(e.clientY-r.top-r.height/2)*.32}px)`});b.addEventListener('pointerleave',()=>b.style.transform='')});
+document.querySelectorAll('h2.rv').forEach(h=>{let i=0;h.innerHTML=h.textContent.trim().split(/\s+/).map(w=>`<span class="wd"><span style="--i:${i++}">${w.replace(/&/g,'&amp;')}</span></span>`).join(' ')});
+// experience
+const X=[['Next XR','UI/UX Designer','May 2025 – Mar 2026',['Designed AR/VR experiences and 3D user flows for medical, engineering, and e-learning platforms.','Built game interfaces and digital products for crypto, e-commerce, and e-learning.','Led branding and product design including logo and visual identity systems.'],['AR/VR','Figma','Game UI','Branding']],
+['AMCI Edtech Pvt. Ltd','UI/UX Designer','Jun 2024 – Mar 2025',['Designed intuitive interfaces for an educational platform, improving engagement and accessibility.','Worked with developers to refine UI components for seamless integration.','Ran usability tests and iterated designs based on user feedback.'],['EdTech','Figma','Usability Testing']],
+['VEGROW — Chifu Agritech','UI/UX Designer','Feb 2024 – Jun 2024',['Designed and optimized interfaces for web and mobile agritech applications.','Created wireframes and interactive prototypes in Figma and Adobe XD.','Conducted user research and improved UI based on stakeholder feedback.'],['Agritech','Adobe XD','Mobile']],
+['RAWE — CRIDA','Intern','Jun 2023 – Sep 2023',['Researched farmers\' tech adoption and trained them on government agri apps.','Worked with agri-tech solutions: Agri App, Farm Guide, Agrostar, Plantix.'],['Research','Agritech']],
+['Agribot Pvt. Ltd.','Design Intern','Dec 2022 – Feb 2023',['Designed VR/AR-based field mapping and crop monitoring solutions.','Used Canva and 3D modeling tools for visual deliverables.'],['VR/AR','3D Modeling','Canva']]];
+$('#ex').innerHTML=X.map(([c,r,d,b,t],i)=>`<div class="row rv${i?'':' o'}"><button aria-expanded="${!i}"><span>${c}</span><small>${r}</small><small>${d}</small><i class="pl"></i></button><div class="pn"><div><ul>${b.map(x=>`<li>${x}</li>`).join('')}</ul><div class="tags">${t.map(x=>`<span class="tg">${x}</span>`).join('')}</div></div></div></div>`).join('');
+$('#ex').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const r=b.parentElement,o=!r.classList.contains('o');document.querySelectorAll('.row').forEach(x=>{x.classList.remove('o');x.firstChild.setAttribute('aria-expanded',false)});if(o){r.classList.add('o');b.setAttribute('aria-expanded',true)}});
+// contact form -> mailto
+$('#f').addEventListener('submit',e=>{e.preventDefault();$('#fs').textContent='Opening your email app. If nothing happens, write to gurunarasimha26@gmail.com.';const b=encodeURIComponent(`Hi Guru,\n\n${$('#m').value}\n\n— ${$('#n').value} (${$('#e').value})`);location.href=`mailto:gurunarasimha26@gmail.com?subject=${encodeURIComponent('Project inquiry from '+$('#n').value)}&body=${b}`});
+// reveal + count-up + bars
+const io=new IntersectionObserver(es=>es.forEach(en=>{if(!en.isIntersecting)return;const el=en.target;el.classList.add('in');io.unobserve(el);
+const s=el.querySelector('[data-n]');if(s){const n=+s.dataset.n,suf=s.dataset.s||'',t0=performance.now();(function f(t){const p=Math.min((t-t0)/1400,1);s.textContent=Math.round(n*(1-Math.pow(1-p,3)))+suf;if(p<1)requestAnimationFrame(f)})(t0)}}),{threshold:.15});
+document.querySelectorAll('.rv,.bar,.pj').forEach(el=>io.observe(el));
+// scroll progress + parallax
+const RM=matchMedia('(prefers-reduced-motion:reduce)').matches,pg=$('#pg'),sp=[...document.querySelectorAll('[data-sp]')],pj=[...document.querySelectorAll('.pj')];
+function sc(){const d=document.documentElement;pg.style.transform=`scaleX(${scrollY/(d.scrollHeight-innerHeight)||0})`;if(RM)return;sp.forEach(el=>{const r=el.getBoundingClientRect(),o=(r.top+r.height/2-innerHeight/2)/innerHeight;el.style.transform=`translateY(${-o*el.dataset.sp}px) rotate(${o*(el.dataset.rt||0)}deg)`});pj.forEach((c,i)=>{const n=pj[i+1];if(!n||innerWidth<761){c.style.transform='';c.style.opacity='';return}const k=Math.min(Math.max((n.getBoundingClientRect().top-120)/innerHeight,0),1);c.style.transform=`scale(${.9+.1*k})`;c.style.opacity=.55+.45*k})}
+addEventListener('scroll',()=>requestAnimationFrame(sc),{passive:true});addEventListener('resize',sc);sc();
+// cursor
+if(matchMedia('(hover:hover) and (pointer:fine)').matches){const c=$('#cur');let x=0,y=0,cx=0,cy=0;document.documentElement.classList.add('hc');addEventListener('pointermove',e=>{x=e.clientX;y=e.clientY;const t=e.target;c.className=t.closest('.pj')?'v':t.closest('a,button,.tg')?'h':''});(function l(){cx+=(x-cx)*.2;cy+=(y-cy)*.2;c.style.transform=`translate(${cx}px,${cy}px)`;requestAnimationFrame(l)})()}
+// preloader
+(()=>{const pre=$('#pre'),pc=$('#pc'),t0=performance.now(),D=RM?0:1300;let done=0;const end=()=>{if(done)return;done=1;pre.classList.add('x');document.documentElement.classList.add('ready');setTimeout(()=>pre.remove(),1100)};(function f(t){const p=D?1:Math.min((t-t0)/D,1);pc.textContent=Math.round(100*p);p<1?requestAnimationFrame(f):end()})(t0);setTimeout(end,3500)})();
 </script>
 </body>
 </html>
